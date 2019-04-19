@@ -27,9 +27,9 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-{{- if .Values.env }}
           env:
-{{ toYaml .Values.env | indent 12 }}
+{{- with .Values.env }}
+{{ tpl . $ | indent 12 }}
 {{- end }}
           ports:
             - name: http
