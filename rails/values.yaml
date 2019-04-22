@@ -29,8 +29,8 @@ fullnameOverride: ""
 ## spec YAML definition:
 ## https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/
 ##
-env: |
-#   - name: EXAMPLE_SIMPLE_TRING
+env: |-
+#   - name: EXAMPLE_SIMPLE_STRING
 #     value: foo
 #   - name: EXAMPLE_CONFIG_VALUE
 #     value: {{ .Values.config.example | quote }}
