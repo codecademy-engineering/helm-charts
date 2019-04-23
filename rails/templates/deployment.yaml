@@ -33,16 +33,12 @@ spec:
 {{- end }}
           ports:
             - name: http
-              containerPort: {{ .Values.service.externalPort }}
+              containerPort: {{ .Values.service.port }}
               protocol: TCP
           livenessProbe:
-            httpGet:
-              path: /
-              port: {{ .Values.service.internalPort }}
+{{ toYaml .Values.livenessProbe | indent 12 }}
           readinessProbe:
-            httpGet:
-              path: /
-              port: {{ .Values.service.internalPort }}
+{{ toYaml .Values.readinessProbe | indent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

@@ -13,7 +13,7 @@
      NOTE: It may take a few minutes for the LoadBalancer IP to be available.
            You can watch the status of by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "rails.fullname" . }}'
   export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ template "rails.fullname" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
-  echo http://$SERVICE_IP:{{ .Values.service.externalPort }}
+  echo http://$SERVICE_IP:{{ .Values.service.port }}
 {{- else if contains "ClusterIP" .Values.service.type }}
-  kubectl port-forward svc/{{ include "rails.fullname" . }} 0:{{.Values.service.externalPort }}
+  kubectl port-forward svc/{{ include "rails.fullname" . }} 0:{{.Values.service.port }}
 {{- end }}

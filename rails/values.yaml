@@ -44,8 +44,7 @@ env: |-
 
 service:
   type: ClusterIP
-  externalPort: 80
-  internalPort: 3000
+  port: 3000
 
 ingress:
   enabled: false
@@ -60,6 +59,24 @@ ingress:
   #  - secretName: rails-tls
   #    hosts:
   #      - rails.test
+
+## To-do: Temporarily comment these out in order to use other handlers. The
+## underlying issue is that Helm overwrite null feature I indtroduced in
+## https://github.com/helm/helm/pull/2648 does not deep merge.
+##
+## Follow issue at: https://github.com/helm/helm/pull/5185
+##
+# # Override livenessProbe.
+# livenessProbe:
+#   httpGet:
+#     path: /
+#     port: http
+#
+# # Override readinessProbe.
+# readinessProbe:
+#   httpGet:
+#     path: /
+#     port: http
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
