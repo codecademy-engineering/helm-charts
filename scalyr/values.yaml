@@ -30,6 +30,33 @@ scalyr:
   #
   apiKeyExistingSecret:
 
+  ## Configuration for ConfigMaps.
+  ## To-do: add replacement options here for ConfigMaps.
+  #
+  config:
+    agentD:
+      ## If true, create default FULLNAME-config-agent-d ConfigMap resource.
+      #
+      create: true
+
+      ## If scalyr.config.configAgentD.create is false, an optional
+      ## existing ConfigMap name to use instead of one created and managed by
+      ## this chart.
+      #
+      custom:
+
+    agentJson:
+      ## If true, create default FULLNAME-config-agent-json ConfigMap resource.
+      #
+      create: true
+
+      ## If scalyr.config.configAgentJson.create is false, an optional
+      ## existing ConfigMap name to use instead of one created and managed by
+      ## this chart.
+      #
+      custom:
+
+
 resources:
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little

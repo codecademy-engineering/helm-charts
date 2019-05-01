@@ -54,6 +54,14 @@ spec:
               readOnly: true
             - name: dockersock
               mountPath: /var/scalyr/docker.sock
+            {{- if or .Values.scalyr.config.agentD.create .Values.scalyr.config.agentD.custom }}
+            - name: config-agent-d
+              mountPath: /etc/scalyr-agent-2/agent.d
+            {{- end }}
+            {{- if or .Values.scalyr.config.agentJson.create .Values.scalyr.config.agentJson.custom }}
+            - name: config-agent-json
+              mountPath: /etc/scalyr-agent-2
+            {{- end }}
       volumes:
         - name: varlibdockercontainers
           hostPath:
@@ -61,6 +69,24 @@ spec:
         - name: dockersock
           hostPath:
             path: /var/run/docker.sock
+        {{- if or .Values.scalyr.config.agentD.create .Values.scalyr.config.agentD.custom }}
+        - name: config-agent-d
+          configMap:
+            {{- if .Values.scalyr.config.agentD.create }}
+            name: {{ include "scalyr.fullname" . }}-config-agent-d
+            {{- else }}
+            name: {{ .Values.scalyr.config.agentD.custom }}
+            {{- end }}
+        {{- end }}
+        {{- if or .Values.scalyr.config.agentJson.create .Values.scalyr.config.agentJson.custom }}
+        - name: config-agent-json
+          configMap:
+            {{- if .Values.scalyr.config.agentJson.create }}
+            name: {{ include "scalyr.fullname" . }}-config-agent-json
+            {{- else }}
+            name: {{ .Values.scalyr.config.agentJson.custom }}
+            {{- end }}
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
