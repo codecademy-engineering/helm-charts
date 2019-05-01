@@ -8,7 +8,7 @@ minutes, you should see your agents starting in your event stream:
 
  {{- else -}}
 ##############################################################################
-####               ERROR: You did not set a scalyr.apiKey.                ####
+####         ERROR: You did not set a scalyr.apiKeyExistingSecret.        ####
 ##############################################################################
 
  This deployment will be incomplete until you get your API key from Scalyr.
@@ -23,5 +23,5 @@ Once registered you can request an API key at:
  Then run:
 
      helm upgrade {{ .Release.Name }} \
-        --set scalyr.apiKeyExistingSecret=YOUR_SECRET_NAME stable/scalyr
+        --set scalyr.apiKeyExistingSecret=YOUR_SECRET_NAME codecademy-engineering/scalyr
 {{- end }}
