@@ -1,3 +1,24 @@
 apiVersion: v1
-entries: {}
-generated: 2019-05-01T16:35:12.313869-04:00
+entries:
+  scalyr:
+  - apiVersion: v1
+    appVersion: v2.0.46
+    created: 2019-05-01T16:49:34.321298-04:00
+    description: Scalyr Agent
+    digest: d9bc2644b9046747b84bdbc6fe8968c57665ebcadfad9b8333b20fdca903f84f
+    home: https://www.scalyr.com
+    icon: https://www.scalyr.com/s2/src/img/logo-reverse.png
+    keywords:
+    - monitoring
+    - alerting
+    - logging
+    maintainers:
+    - email: scott@r6by.com
+      name: Scott Rigby
+    name: scalyr
+    sources:
+    - https://www.scalyr.com/help/install-agent-kubernetes
+    urls:
+    - https://codecademy-engineering.github.io/helm-charts/scalyr-0.1.0.tgz
+    version: 0.1.0
+generated: 2019-05-01T16:49:34.320597-04:00
