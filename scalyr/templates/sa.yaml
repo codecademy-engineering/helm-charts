@@ -1,0 +1,13 @@
+{{ if .Values.rbac.create }}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ include "scalyr.fullname" . }}-service-account
+  labels:
+    app.kubernetes.io/name: {{ include "scalyr.name" . }}
+    helm.sh/chart: {{ include "scalyr.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+secrets:
+  - name: {{ .Values.scalyr.apiKeyExistingSecret }}
+{{ end }}

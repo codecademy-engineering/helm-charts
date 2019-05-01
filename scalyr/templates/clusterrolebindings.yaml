@@ -1,0 +1,19 @@
+{{ if .Values.rbac.create }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "scalyr.fullname" . }}-clusterrole-binding
+  labels:
+    app.kubernetes.io/name: {{ include "scalyr.name" . }}
+    helm.sh/chart: {{ include "scalyr.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ include "scalyr.fullname" . }}-clusterrole
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "scalyr.fullname" . }}-service-account
+    namespace: {{ .Release.Namespace }}
+{{ end }}

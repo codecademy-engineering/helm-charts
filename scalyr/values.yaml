@@ -1,0 +1,60 @@
+# Default values for scalyr.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: scalyr/scalyr-k8s-agent
+  tag: 2.0.46
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+rbac:
+  ## If true, create & use RBAC resources.
+  #
+  create: true
+
+  ## If rbac.create is false, a required existing ServiceAccount name to use
+  ## instead of one created and managed by this chart.
+  #
+  serviceAccountName: default
+
+scalyr:
+  ## Before the Scalyr agent will run, you must define your Write Logs API key.
+  ## You can find this under "Logs Access Keys" at https://www.scalyr.com/keys.
+  ## Make sure the key has "write" access.
+  #
+  ## You must create a secret in the cluster, using the "api-key" keypair key:
+  ## kubectl create secret generic YOUR_SECRET_NAME --from-literal=api-key="YOUR_KEY"
+  #
+  apiKeyExistingSecret:
+
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+  #
+  ## Note resources.limits.memory=500Mi is the recommendation from Scalyr.
+  ## Ref: https://raw.githubusercontent.com/scalyr/scalyr-agent-2/release/k8s/scalyr-agent-2.yaml
+  #
+  limits:
+    memory: 500Mi
+
+nodeSelector: {}
+
+tolerations:
+  ## Comment this section if you do not want to run on the master tolerations:
+  #
+  - key: "node-role.kubernetes.io/master"
+    operator: "Exists"
+    effect: "NoSchedule"
+
+affinity: {}
