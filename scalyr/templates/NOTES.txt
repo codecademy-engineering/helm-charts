@@ -23,5 +23,5 @@ Once registered you can request an API key at:
  Then run:
 
      helm upgrade {{ .Release.Name }} \
-        --set scalyr.apiKeyExistingSecret=YOUR_SECRET_NAME codecademy-engineering/scalyr
+        --set scalyr.apiKeyExistingSecret=YOUR_SECRET_NAME codecademy/scalyr
 {{- end }}

@@ -24,8 +24,8 @@ $ kubectl create secret generic YOUR_SECRET_NAME --from-literal=api-key="YOUR_KE
 Then:
 
 ```console
-$ helm repo add scalyr https://codecademy-engineering.github.io/helm-charts
-$ helm install --name my-release codecademy-engineering/scalyr \
+$ helm repo add codecademy https://codecademy-engineering.github.io/helm-charts
+$ helm install --name my-release codecademy/scalyr \
     --set scalyr.apiKeyExistingSecret=YOUR_SECRET_NAME
 ```
 
@@ -63,7 +63,7 @@ The command removes all the Kubernetes components associated with the chart and 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
 
 ```console
-$ helm install --name my-release codecademy-engineering/scalyr \
+$ helm install --name my-release codecademy/scalyr \
     --set scalyr.apiKeyExistingSecret=YOUR_SECRET_NAME \
     --set rbac.create=false \
     --set rbac.serviceAccountName=MY_SERVICE_ACCOUNT_NAME
@@ -72,7 +72,7 @@ $ helm install --name my-release codecademy-engineering/scalyr \
 Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example:
 
 ```console
-$ helm install --name my-release codecademy-engineering/scalyr \
+$ helm install --name my-release codecademy/scalyr \
     -f shared-values.yaml \
     -f staging-values.yaml
 ```
