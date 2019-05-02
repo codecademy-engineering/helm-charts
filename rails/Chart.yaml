@@ -1,5 +1,9 @@
 apiVersion: v1
 appVersion: "0.1.0"
 description: Rails
+home: https://rubyonrails.org/
+maintainers:
+  - email: scott@r6by.com
+    name: scottrigby
 name: rails
-version: 0.1.0
+version: 0.1.1

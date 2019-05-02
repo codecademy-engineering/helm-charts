@@ -9,8 +9,8 @@ keywords:
   - logging
 maintainers:
   - email: scott@r6by.com
-    name: Scott Rigby
+    name: scottrigby
 name: scalyr
 sources:
   - https://www.scalyr.com/help/install-agent-kubernetes
-version: 0.1.0
+version: 0.1.1
