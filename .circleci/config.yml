@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run:
           name: Lint charts
-          command: ct lint
+          command: ct lint --config .circleci/ct.yaml
 workflows:
   version: 2
   lint:
