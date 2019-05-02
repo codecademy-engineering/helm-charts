@@ -8,8 +8,35 @@ jobs:
       - run:
           name: Lint charts
           command: ct lint --config .circleci/ct.yaml
+
+  release-charts:
+    docker:
+      - image: lachlanevenson/k8s-helm:v2.13.1
+        entrypoint: sh
+    steps:
+      - run:
+          name: Add git package
+          command: apk add --no-cache git
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "84:f7:a1:a5:6f:01:fd:68:24:47:6f:bd:16:bb:ee:3f"
+      - run:
+          command: |
+            echo "export CIRCLE_PROJECT_USERNAME=$CIRCLE_PROJECT_USERNAME" >> $BASH_ENV
+            echo "export CIRCLE_PROJECT_REPONAME=$CIRCLE_PROJECT_REPONAME" >> $BASH_ENV
+            .circleci/release.sh
+
 workflows:
   version: 2
   lint:
     jobs:
       - lint-charts
+  release:
+    jobs:
+      - release-charts:
+          filters:
+            tags:
+              ignore: /.*/
+            branches:
+              only: master
