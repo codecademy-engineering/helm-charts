@@ -15,7 +15,7 @@ jobs:
         entrypoint: sh
     steps:
       - run:
-          name: Add git package
+          name: Add alpine packages
           command: apk add --no-cache git openssh-client
       - checkout
       - add_ssh_keys:

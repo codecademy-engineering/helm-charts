@@ -27,19 +27,20 @@ helm repo index .deploy --url https://${CIRCLE_PROJECT_USERNAME}.github.io/${CIR
 
 # Get newly generaged index.yaml values for comparison. Note timestamps will
 # never match, so remove them for comparison.
-NEW_INDEX=`yq r .deploy/index.yaml -j | jq 'del(.. | .created?)' | jq 'del(.. | .generated?)'`
+NEW_INDEX=`sed -e '/created:/d' -e '/generated:/d' .deploy/index.yaml`
 
 # Check out helm repo gh-pages branch, to compare existing index.yaml.
 git checkout gh-pages
-OLD_INDEX=`yq r index.yaml -j | jq 'del(.. | .created?)' | jq 'del(.. | .generated?)'`
+git pull origin gh-pages
+OLD_INDEX=`sed -e '/created:/d' -e '/generated:/d' .deploy/index.yaml index.yaml`
 
 if [ "$NEW_INDEX" != "$OLD_INDEX" ]; then
     # If the index files (without dates) are not identical, remove any existing
     # artifacts, and copy the new one in place.
-    git rm .
+    rm *.yaml *.tgz
     cp --force .deploy/* .
     rm -r .deploy
-    git add .
+    git add -A
 
     # Commit and push changes to gh-pages branch.
     git config user.email "$GIT_EMAIL"
