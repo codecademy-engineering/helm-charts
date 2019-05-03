@@ -18,6 +18,7 @@ git pull origin master
 # Clean directory to add packaged charts, and index.yaml.
 rm -rf .deploy
 mkdir -p .deploy
+helm init --client-only
 for CHART in charts/*; do
     helm dependency build $CHART
     helm package $CHART --destination .deploy
