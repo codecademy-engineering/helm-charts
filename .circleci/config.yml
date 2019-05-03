@@ -29,12 +29,12 @@ jobs:
 
 workflows:
   version: 2
-  lint:
+  lint-release:
     jobs:
       - lint-charts
-  release:
-    jobs:
       - release-charts:
+          requires:
+            - lint-charts
           filters:
             tags:
               ignore: /.*/
