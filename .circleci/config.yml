@@ -20,7 +20,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "84:f7:a1:a5:6f:01:fd:68:24:47:6f:bd:16:bb:ee:3f"
+            - "92:f7:7d:de:ec:7c:c9:4d:94:2f:4d:72:c1:98:44:16"
       - run:
           command: |
             echo "export CIRCLE_PROJECT_USERNAME=$CIRCLE_PROJECT_USERNAME" >> $BASH_ENV
