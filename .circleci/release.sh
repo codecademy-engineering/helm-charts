@@ -24,28 +24,30 @@ for CHART in charts/*; do
     helm package $CHART --destination $TEMP_DIR
 done
 
-# Store old index YAML as a variable for comparison. Note that timestamps
-# between generated helm repo index files will never match, so we remove them
-# when setting variables for comparison.
-# Newly packaged charts will also always have a different digest:
-# Ref: https://github.com/helm/helm/issues/4482
+# Because `helm repo index` always updates the "generated" timestamp, we only
+# want to push the merged index YAML if there are any other changes.
+# Therefore we store the existing index YAML to a variable, minus "generated".
 git checkout gh-pages
 git pull origin gh-pages
-OLD_INDEX=`sed -e '/created:/d' -e '/generated:/d' -e '/digest:/d' index.yaml`
+OLD_INDEX=`sed -e '/generated:/d' index.yaml`
 
-# Generate new index YAML from stashed master charts source, and store as a
-# new variable for comparison.
-# Merge into existing index.yaml, so that we keep any previous chart versions.
+# Remove chart packages from TEMP_DIR that match existing chart packages.
+# Ref: https://github.com/helm/helm/issues/4482
+for CHART in `ls $TEMP_DIR`; do
+    [ -f $CHART ] && rm $TEMP_DIR/$CHART
+done
+# Build a new index YAML file with only new charts.
 helm repo index $TEMP_DIR --merge index.yaml --url https://${CIRCLE_PROJECT_USERNAME}.github.io/${CIRCLE_PROJECT_REPONAME}
-NEW_INDEX=`sed -e '/created:/d' -e '/generated:/d' -e '/digest:/d' $TEMP_DIR/index.yaml`
+
+# Store newly generated index YAML to another variable for comparison.
+NEW_INDEX=`sed -e '/generated:/d' $TEMP_DIR/index.yaml`
 
 if [ "$NEW_INDEX" != "$OLD_INDEX" ]; then
-    # If the index files (without dates) are not identical, copy only new
-    # artifacts in place, and the newly merged index file over the old one.
-    cp -u $TEMP_DIR/* .
-    git add -A
+    # Add new chart packages and index YAML from TEMP_DIR.
+    cp -f $TEMP_DIR/* .
 
     # Commit and push changes to gh-pages branch.
+    git add *.tgz index.yaml
     git config user.email "$GIT_EMAIL"
     git config user.name "$GIT_USERNAME"
     git commit --message "Update Helm repo index and packages [skip ci]" --signoff
