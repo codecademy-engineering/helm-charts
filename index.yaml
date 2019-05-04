@@ -3,9 +3,9 @@ entries:
   rails:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: 2019-05-04T19:37:58.432226285Z
+    created: 2019-05-04T19:40:12.033773826Z
     description: Rails
-    digest: 81bcea7e6d2e25ea5b0c73c8b0b7a2c97f82150dfc5ba020cd2b592f17e5da7d
+    digest: ba42cb4fe4df9db22301bdf007f36ea9bfdb39df47a8357602e8aedef9476e2a
     home: https://rubyonrails.org/
     maintainers:
     - email: scott@r6by.com
@@ -17,9 +17,9 @@ entries:
   scalyr:
   - apiVersion: v1
     appVersion: v2.0.46
-    created: 2019-05-04T19:37:58.432607454Z
+    created: 2019-05-04T19:40:12.034444792Z
     description: Scalyr Agent
-    digest: 8d21c0eded666c3033e029dba225b915e62899ea5579b1f3460cd3c1e0c47b6a
+    digest: a9b8ceace3ba4da788c599eefe7672e2752d156b4adc7058c28f9ede46356571
     home: https://www.scalyr.com
     icon: https://www.scalyr.com/s2/src/img/logo-reverse.png
     keywords:
@@ -55,4 +55,4 @@ entries:
     urls:
     - https://codecademy-engineering.github.io/helm-charts/scalyr-0.1.0.tgz
     version: 0.1.0
-generated: 2019-05-04T19:37:58.431786144Z
+generated: 2019-05-04T19:40:12.033060515Z
