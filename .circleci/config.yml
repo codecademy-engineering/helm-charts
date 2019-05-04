@@ -31,12 +31,7 @@ workflows:
   version: 2
   lint-release:
     jobs:
-      - lint-charts:
-          filters:
-            tags:
-              ignore: /.*/
-            branches:
-              ignore: gh-pages
+      - lint-charts
       - release-charts:
           requires:
             - lint-charts

@@ -48,7 +48,7 @@ if [ "$NEW_INDEX" != "$OLD_INDEX" ]; then
     # Commit and push changes to gh-pages branch.
     git config user.email "$GIT_EMAIL"
     git config user.name "$GIT_USERNAME"
-    git commit --message "Update Helm repo index and packages" --signoff
+    git commit --message "Update Helm repo index and packages [skip ci]" --signoff
     git push origin gh-pages
 else
     echo Nothing to do. No chart changes detected.
