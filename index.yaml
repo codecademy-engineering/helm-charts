@@ -1,6 +1,40 @@
 apiVersion: v1
 entries:
+  rails:
+  - apiVersion: v1
+    appVersion: 0.1.0
+    created: 2019-05-04T19:37:58.432226285Z
+    description: Rails
+    digest: 81bcea7e6d2e25ea5b0c73c8b0b7a2c97f82150dfc5ba020cd2b592f17e5da7d
+    home: https://rubyonrails.org/
+    maintainers:
+    - email: scott@r6by.com
+      name: scottrigby
+    name: rails
+    urls:
+    - https://codecademy-engineering.github.io/helm-charts/rails-0.1.1.tgz
+    version: 0.1.1
   scalyr:
+  - apiVersion: v1
+    appVersion: v2.0.46
+    created: 2019-05-04T19:37:58.432607454Z
+    description: Scalyr Agent
+    digest: 8d21c0eded666c3033e029dba225b915e62899ea5579b1f3460cd3c1e0c47b6a
+    home: https://www.scalyr.com
+    icon: https://www.scalyr.com/s2/src/img/logo-reverse.png
+    keywords:
+    - monitoring
+    - alerting
+    - logging
+    maintainers:
+    - email: scott@r6by.com
+      name: scottrigby
+    name: scalyr
+    sources:
+    - https://www.scalyr.com/help/install-agent-kubernetes
+    urls:
+    - https://codecademy-engineering.github.io/helm-charts/scalyr-0.1.1.tgz
+    version: 0.1.1
   - apiVersion: v1
     appVersion: v2.0.46
     created: 2019-05-01T16:49:34.321298-04:00
@@ -21,4 +55,4 @@ entries:
     urls:
     - https://codecademy-engineering.github.io/helm-charts/scalyr-0.1.0.tgz
     version: 0.1.0
-generated: 2019-05-01T16:49:34.320597-04:00
+generated: 2019-05-04T19:37:58.431786144Z
