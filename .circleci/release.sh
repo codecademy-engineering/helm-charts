@@ -15,31 +15,32 @@ set -o pipefail
 git fetch origin
 git pull origin master
 
-# Clean directory to add packaged charts, and index.yaml.
-rm -rf .deploy
-mkdir -p .deploy
+# Stash packaged charts and index YAML file from master charts source into a
+# temporary directory.
+TEMP_DIR=`mktemp -d`
 helm init --client-only
 for CHART in charts/*; do
     helm dependency build $CHART
-    helm package $CHART --destination .deploy
+    helm package $CHART --destination $TEMP_DIR
 done
-helm repo index .deploy --url https://${CIRCLE_PROJECT_USERNAME}.github.io/${CIRCLE_PROJECT_REPONAME}
 
-# Get newly generaged index.yaml values for comparison. Note timestamps will
-# never match, so remove them for comparison.
-NEW_INDEX=`sed -e '/created:/d' -e '/generated:/d' .deploy/index.yaml`
-
-# Check out helm repo gh-pages branch, to compare existing index.yaml.
+# Store old index YAML as a variable for comparison. Note that timestamps
+# between generated helm repo index files will never match, so we remove them
+# when setting variables for comparison.
 git checkout gh-pages
 git pull origin gh-pages
-OLD_INDEX=`sed -e '/created:/d' -e '/generated:/d' .deploy/index.yaml index.yaml`
+OLD_INDEX=`sed -e '/created:/d' -e '/generated:/d' index.yaml`
+
+# Generate new index YAML from stashed master charts source, and store as a
+# new variable for comparison.
+# Merge into existing index.yaml, so that we keep any previous chart versions.
+helm repo index $TEMP_DIR --merge index.yaml --url https://${CIRCLE_PROJECT_USERNAME}.github.io/${CIRCLE_PROJECT_REPONAME}
+NEW_INDEX=`sed -e '/created:/d' -e '/generated:/d' $TEMP_DIR/index.yaml`
 
 if [ "$NEW_INDEX" != "$OLD_INDEX" ]; then
-    # If the index files (without dates) are not identical, remove any existing
-    # artifacts, and copy the new one in place.
-    rm *.yaml *.tgz
-    cp --force .deploy/* .
-    rm -r .deploy
+    # If the index files (without dates) are not identical, copy any new
+    # artifacts in place, and the newly merged index file over the old one.
+    cp --force $TEMP_DIR/* .
     git add -A
 
     # Commit and push changes to gh-pages branch.
