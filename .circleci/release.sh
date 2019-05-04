@@ -27,20 +27,22 @@ done
 # Store old index YAML as a variable for comparison. Note that timestamps
 # between generated helm repo index files will never match, so we remove them
 # when setting variables for comparison.
+# Newly packaged charts will also always have a different digest:
+# Ref: https://github.com/helm/helm/issues/4482
 git checkout gh-pages
 git pull origin gh-pages
-OLD_INDEX=`sed -e '/created:/d' -e '/generated:/d' index.yaml`
+OLD_INDEX=`sed -e '/created:/d' -e '/generated:/d' -e '/digest:/d' index.yaml`
 
 # Generate new index YAML from stashed master charts source, and store as a
 # new variable for comparison.
 # Merge into existing index.yaml, so that we keep any previous chart versions.
 helm repo index $TEMP_DIR --merge index.yaml --url https://${CIRCLE_PROJECT_USERNAME}.github.io/${CIRCLE_PROJECT_REPONAME}
-NEW_INDEX=`sed -e '/created:/d' -e '/generated:/d' $TEMP_DIR/index.yaml`
+NEW_INDEX=`sed -e '/created:/d' -e '/generated:/d' -e '/digest:/d' $TEMP_DIR/index.yaml`
 
 if [ "$NEW_INDEX" != "$OLD_INDEX" ]; then
-    # If the index files (without dates) are not identical, copy any new
+    # If the index files (without dates) are not identical, copy only new
     # artifacts in place, and the newly merged index file over the old one.
-    cp --force $TEMP_DIR/* .
+    cp -u $TEMP_DIR/* .
     git add -A
 
     # Commit and push changes to gh-pages branch.
