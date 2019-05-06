@@ -1,5 +1,6 @@
 # codecademy Helm Charts
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![CircleCI](https://circleci.com/gh/codecademy-engineering/helm-charts/tree/master.svg?style=svg)](https://circleci.com/gh/codecademy-engineering/helm-charts/tree/master)
 
 This repo collects a set of [Helm](https://helm.sh) charts curated by [Codecademy](https://www.codecademy.com).
