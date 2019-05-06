@@ -17,3 +17,7 @@ $ helm repo add codecademy https://codecademy-engineering.github.io/helm-charts
 ```
 
 You can then run `helm search codecademy` to see the charts.
+
+## Contribution Guidelines
+
+We'd love to have you contribute! Please refer to our [contribution guidelines](CONTRIBUTING.md) for details.
