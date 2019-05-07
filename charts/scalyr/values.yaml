@@ -34,6 +34,20 @@ scalyr:
   ## To-do: add replacement options here for ConfigMaps.
   #
   config:
+    ## Optinally define your cluster name in the main scalyr ConfigMap.
+    ## This groups your pods by cluster in Scalyr.
+    #
+    k8sCluster:
+
+    ## Optionally define a custom server.
+    #
+    scalyrServer:
+
+    ## Optionally disable the kubernetes events monitor.
+    ## Ref: https://www.scalyr.com/help/monitors/kubernetes-events#disableMonitor
+    #
+    k8sEventsDisable:
+
     agentD:
       ## If true, create default FULLNAME-config-agent-d ConfigMap resource.
       #

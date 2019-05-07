@@ -28,24 +28,30 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.scalyr.apiKeyExistingSecret }}
                   key: api-key
+            {{- if .Values.scalyr.config.k8sCluster }}
             - name: SCALYR_K8S_CLUSTER_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: scalyr-config
+                  name: {{ include "scalyr.fullname" . }}-config
                   key: k8s_cluster
                   optional: true
+            {{- end }}
+            {{- if .Values.scalyr.config.scalyrServer }}
             - name: SCALYR_SERVER
               valueFrom:
                 configMapKeyRef:
-                  name: scalyr-config
+                  name: {{ include "scalyr.fullname" . }}-config
                   key: scalyr_server
                   optional: true
+            {{- end }}
+            {{ if .Values.scalyr.config.k8sEventsDisable }}
             - name: K8S_EVENTS_DISABLE
               valueFrom:
                 configMapKeyRef:
-                  name: scalyr-config
+                  name: {{ include "scalyr.fullname" . }}-config
                   key: k8s_events_disable
                   optional: true
+            {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
