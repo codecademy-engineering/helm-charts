@@ -31,16 +31,13 @@ $ helm install --name my-release codecademy/scalyr \
 
 ## Upgrading the chart
 
-If you upgrade `config` values, this won't automatically recrete the daemonset pods. To do this, you must delete the pods so they can regenerate their containers with the new ENV variables set by the updated ConfigMaps. Example:
+If you upgrade `config` values, this won't automatically recrete the daemonset pods. To do this, you must delete the pods so they can regenerate their containers with the new ENV variables set by the updated ConfigMaps. You can use the `--recreate-pods` flag to do this. Example:
 
 ```console
-$ helm upgrade scalyr codecademy/scalyr --reuse-values --set scalyr.config.k8sCluster=YOUR_CLUSTER_NAME
-$ for POD in `kubectl get pods -l app.kubernetes.io/name=scalyr -o name`; do kubectl delete $POD; done
-pod "scalyr-abcde" deleted
-pod "scalyr-fghij" deleted
-pod "scalyr-klmno" deleted
-pod "scalyr-pqrst" deleted
-pod "scalyr-uvwxy" deleted
+$ helm upgrade my-release codecademy/scalyr \
+    --reuse-values \
+    --set scalyr.config.k8sCluster=YOUR_CLUSTER_NAME \
+    --recreate-pods
 ```
 
 ## Uninstalling the Chart
@@ -48,7 +45,7 @@ pod "scalyr-uvwxy" deleted
 To uninstall/delete the `my-release` deployment:
 
 ```console
-$ helm delete my-release
+$ helm delete --purge my-release
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
