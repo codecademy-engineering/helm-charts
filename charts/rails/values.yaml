@@ -18,29 +18,41 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
-## Configure additional environment variables for the web containers.
+## Configure standard environment variables.
+## Ref: https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/
+envs:
+  # - name: EXAMPLE_SIMPLE_STRING
+  #   value: foo
+  # - name: EXAMPLE_FROM_SECRET
+  #   valueFrom:
+  #     secretKeyRef:
+  #       name: auth
+  #       key: password
+
+## Configure dynamic environment variables with Chart template expressions.
 ##
 ## In order to allow template values (setting ENV vars from secrets, etc) the
-## deployment template uses "tpl". See a similar use in stable/keycloak:
-## https://github.com/helm/charts/blob/master/stable/keycloak/values.yaml#L68-L69
-## Note the YAML block style literal ("|") must be used per the example below.
+## deployment template uses "tpl". Note the YAML block style literal ("|") must
+## be used per the example below.
 ##
-## Otherwise the "env" value must be a properly formatted pod container env
-## spec YAML definition:
-## https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/
+## Because of this, Helm's deep merging on values will treat this as one string
+## so you will need to repeat the entire previous block with any changes. This
+## is fragile, but the only way to configure dynamic environment values in Helm
+## v2.
+## Therefore, in order to keep overriding values simple, the 'envs'
+## configuration above should be used for simple environemnt variables - when
+## dynamic, templated expressions are not required.
 ##
-env: |-
-#   - name: EXAMPLE_SIMPLE_STRING
-#     value: foo
-#   - name: EXAMPLE_CONFIG_VALUE
-#     value: {{ .Values.config.example | quote }}
-#   - name: EXAMPLE_RELEASE_VALUE
-#     value: {{ .Release.Namespace }}
-#   - name: EXAMPLE_FROM_SECRET
-#     valueFrom:
-#       secretKeyRef:
-#         name: {{ if .Values.config.existingSecret }}{{ .Values.config.existingSecret }}{{- else }}{{ include "rails.fullname" . }}{{- end }}
-#         key: password
+envsTemplate: |-
+  # - name: EXAMPLE_TEMPLATE_CONFIG_VALUE
+  #   value: {{ .Values.config.example | quote }}
+  # - name: EXAMPLE_TEMPLATE_RELEASE_VALUE
+  #   value: {{ .Release.Namespace }}
+  # - name: EXAMPLE_TEMPLATE_FROM_SECRET
+  #   valueFrom:
+  #     secretKeyRef:
+  #       name: {{ if .Values.config.existingSecret }}{{ .Values.config.existingSecret }}{{- else }}{{ include "rails.fullname" . }}{{- end }}
+  #       key: password
 
 service:
   type: ClusterIP
