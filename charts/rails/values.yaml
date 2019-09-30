@@ -52,15 +52,15 @@ envs:
 ## dynamic, templated expressions are not required.
 ##
 envsTemplate: |-
-  # - name: EXAMPLE_TEMPLATE_CONFIG_VALUE
-  #   value: {{ .Values.config.example | quote }}
-  # - name: EXAMPLE_TEMPLATE_RELEASE_VALUE
-  #   value: {{ .Release.Namespace }}
-  # - name: EXAMPLE_TEMPLATE_FROM_SECRET
-  #   valueFrom:
-  #     secretKeyRef:
-  #       name: {{ if .Values.config.existingSecret }}{{ .Values.config.existingSecret }}{{- else }}{{ include "rails.fullname" . }}{{- end }}
-  #       key: password
+#   - name: EXAMPLE_TEMPLATE_CONFIG_VALUE
+#     value: {{ .Values.config.example | quote }}
+#   - name: EXAMPLE_TEMPLATE_RELEASE_VALUE
+#     value: {{ .Release.Namespace }}
+#   - name: EXAMPLE_TEMPLATE_FROM_SECRET
+#     valueFrom:
+#       secretKeyRef:
+#         name: {{ if .Values.config.existingSecret }}{{ .Values.config.existingSecret }}{{- else }}{{ include "rails.fullname" . }}{{- end }}
+#         key: password
 
 service:
   type: ClusterIP
