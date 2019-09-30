@@ -3,6 +3,20 @@ entries:
   rails:
   - apiVersion: v1
     appVersion: 0.1.0
+    created: 2019-09-30T21:25:46.777449436Z
+    description: Rails
+    digest: 4c3e6c31b9f4a2100a4cf46f85a46c4f341fff70ced903ea4e9a3fc1169563f5
+    home: https://rubyonrails.org/
+    icon: https://rubyonrails.org/images/rails-logo.svg
+    maintainers:
+    - email: scott@r6by.com
+      name: scottrigby
+    name: rails
+    urls:
+    - https://codecademy-engineering.github.io/helm-charts/rails-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v1
+    appVersion: 0.1.0
     created: 2019-05-04T23:13:58.109437353Z
     description: Rails
     digest: e4cb83a2dd3969005d2c1620aa1cfc2db7be3818b484c452a55808cd207fcf7d
@@ -137,4 +151,4 @@ entries:
     urls:
     - https://codecademy-engineering.github.io/helm-charts/scalyr-0.1.0.tgz
     version: 0.1.0
-generated: 2019-06-27T23:47:09.718783718Z
+generated: 2019-09-30T21:25:46.77695648Z
