@@ -65,12 +65,13 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: rails.test
-      paths: []
+      paths:
+        - '/'
 
-  tls: []
-  #  - secretName: rails-tls
-  #    hosts:
-  #      - rails.test
+  tls:
+    - secretName: rails-tls
+      hosts:
+        - rails.test
 
 ## To-do: Temporarily comment these out in order to use other handlers. The
 ## underlying issue is that Helm overwrite null feature I indtroduced in
