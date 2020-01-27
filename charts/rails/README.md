@@ -40,6 +40,41 @@ See [helm upgrade](https://github.com/helm/helm/blob/master/docs/helm/helm_upgra
 $ helm upgrade --install my-release codecademy/rails
 ```
 
+### To 2.0.0
+
+- `envs` was refactored from a list to a map, due to a mistake in overriding, and to help with simplicity. See [this Helm issue](https://github.com/helm/helm/issues/3486). Major version bumped because the new format is not backwards compatible, even though it does fix a bug in overriding.
+    - Before:
+    ```yaml
+    envs:
+      - name: EXAMPLE_SIMPLE_STRING
+        value: foo
+      - name: ANOTHER_KEY
+        value: bar
+    ```
+    - After:
+    ```yaml
+    envs:
+      EXAMPLE_SIMPLE_STRING: foo
+      ANOTHER_KEY: bar
+    ```
+- `envsSecrets` was introduced to similarly allow overriding envs from secrets.
+    - Before:
+    ```yaml
+    envs:
+      - name: EXAMPLE_FROM_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: auth
+            key: password
+    ```
+    - After:
+    ```yaml
+    envsSecrets:
+      EXAMPLE_FROM_SECRET:
+        name: auth
+        key: password
+    ```
+
 ### To 1.0.0
 
 - `env` was removed in favor of `envs` (for simple environment variables) and `envsTemplate` (for dynamic environment variables using Chart template expressions). This change was made to allow for easier overriding of values, as most do not need dynamic templating. Use the comments and examples in `values.yaml` as a guide for splitting any existing values between the two when upgrade.

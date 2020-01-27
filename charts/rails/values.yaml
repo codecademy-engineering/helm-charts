@@ -28,14 +28,18 @@ fullnameOverride: ""
 
 ## Configure standard environment variables.
 ## Ref: https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/
+## Because this is a map you may override only the envs you wish in additional
+## values files.
+## Ref: https://github.com/helm/helm/issues/3486
 envs:
-  # - name: EXAMPLE_SIMPLE_STRING
-  #   value: foo
-  # - name: EXAMPLE_FROM_SECRET
-  #   valueFrom:
-  #     secretKeyRef:
-  #       name: auth
-  #       key: password
+  # EXAMPLE_SIMPLE_STRING: foo
+  # ANOTHER_KEY: bar
+
+## See "envs" above.
+envsSecrets:
+  # EXAMPLE_FROM_SECRET:
+  #   name: auth
+  #   key: password
 
 ## Configure dynamic environment variables with Chart template expressions.
 ##
@@ -47,9 +51,9 @@ envs:
 ## so you will need to repeat the entire previous block with any changes. This
 ## is fragile, but the only way to configure dynamic environment values in Helm
 ## v2.
-## Therefore, in order to keep overriding values simple, the 'envs'
-## configuration above should be used for simple environemnt variables - when
-## dynamic, templated expressions are not required.
+## Therefore, in order to keep overriding values simple, the 'envs' and
+## 'envsSecrets' configuration above should be used for simple environemnt
+## variables - when dynamic, templated expressions are not required.
 ##
 envsTemplate: |-
 #   - name: EXAMPLE_TEMPLATE_CONFIG_VALUE
