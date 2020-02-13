@@ -31,6 +31,11 @@ spec:
           command:
 {{ toYaml .Values.image.command | indent 12 }}
           {{- end }}
+          {{- if .Values.envFromSecret }}
+          envFrom:
+            - secretRef:
+                name: {{ .Values.envFromSecret }}
+          {{- end }}
           {{- if or .Values.envs .Values.envsSecrets .Values.envsTemplate }}
           env:
             {{- range $key, $value := .Values.envs }}
