@@ -95,7 +95,7 @@ nameOverride | String to partially override rails.fullname template with a strin
 fullnameOverride | String to fully override rails.fullname template with a string | `nil`
 envs | Map of standard environment variables | `nil`
 envsTemplate | YAML block literal string for dynamic environment variables using Chart template expressions | `''`
-envFromSecret | String of secret name from which to pull a list of environment variables | `''`
+envFromSecret | Kubernetes Secret name from which to pull a list of environment variables | `''`
 service.type | Kubernetes Service type | `ClusterIP`
 service.port | Service port | `3000`
 ingress.enabled | Enable ingress controller resource | `false`
