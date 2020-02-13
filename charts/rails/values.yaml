@@ -66,6 +66,11 @@ envsTemplate: |-
 #         name: {{ if .Values.config.existingSecret }}{{ .Values.config.existingSecret }}{{- else }}{{ include "rails.fullname" . }}{{- end }}
 #         key: password
 
+## Configure environment variables from a secrets file.
+## Ref: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#configure-all-key-value-pairs-in-a-secret-as-container-environment-variables
+## If envFromSecret and envs both define the same variable, envs will always take precedence.
+envFromSecret: ""
+
 service:
   type: ClusterIP
   port: 3000

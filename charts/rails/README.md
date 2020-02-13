@@ -40,17 +40,6 @@ See [helm upgrade](https://github.com/helm/helm/blob/master/docs/helm/helm_upgra
 $ helm upgrade --install my-release codecademy/rails
 ```
 
-### To 2.1.0
-
-- added `envFromSecret`. This allows reading a list of environment variables from a secrets file; useful for the monolith based on how tokens are stored in Secrets Manager. Can be used in combination with `envs`. If there are environment variable collisions in `envFromSecret` and `envs`, `envs` will always take precedence.
-  - Example:
-  ```yaml
-    envFromSecret: token
-  ```
-  - where `token` is the name of the secret in kubernetes
-
-- Documentation on this feature can be found [here](https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#configure-all-key-value-pairs-in-a-secret-as-container-environment-variables)
-
 ### To 2.0.0
 
 - `envs` was refactored from a list to a map, due to a mistake in overriding, and to help with simplicity. See [this Helm issue](https://github.com/helm/helm/issues/3486). Major version bumped because the new format is not backwards compatible, even though it does fix a bug in overriding.
