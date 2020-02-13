@@ -49,6 +49,8 @@ $ helm upgrade --install my-release codecademy/rails
   ```
   - where `token` is the name of the secret in kubernetes
 
+- Documentation on this feature can be found [here](https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#configure-all-key-value-pairs-in-a-secret-as-container-environment-variables)
+
 ### To 2.0.0
 
 - `envs` was refactored from a list to a map, due to a mistake in overriding, and to help with simplicity. See [this Helm issue](https://github.com/helm/helm/issues/3486). Major version bumped because the new format is not backwards compatible, even though it does fix a bug in overriding.
