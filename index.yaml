@@ -3,6 +3,20 @@ entries:
   rails:
   - apiVersion: v1
     appVersion: 0.1.0
+    created: "2020-02-13T21:25:28.502343541Z"
+    description: Rails
+    digest: 84f4ad48ac6ed298be944866196a0528790921546eb7e818b3df2fab198083a2
+    home: https://rubyonrails.org/
+    icon: https://rubyonrails.org/images/rails-logo.svg
+    maintainers:
+    - email: scott@r6by.com
+      name: scottrigby
+    name: rails
+    urls:
+    - https://github.com/codecademy-engineering/helm-charts/releases/download/rails-2.1.0/rails-2.1.0.tgz
+    version: 2.1.0
+  - apiVersion: v1
+    appVersion: 0.1.0
     created: "2020-01-27T20:20:10.131077092Z"
     description: Rails
     digest: a0ab5d9957ff25b465c543e620499552d98cc37c953e2f6ce10e6e5682357631
