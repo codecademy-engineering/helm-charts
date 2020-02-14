@@ -30,7 +30,7 @@ See [helm delete](https://github.com/helm/helm/blob/master/docs/helm/helm_delete
 $ helm delete --purge my-release
 ```
 
-## Upgrading
+## Upgrading (breaking changes)
 
 Make any required changes, depending on the version you're upgrading to below.
 
@@ -40,7 +40,7 @@ See [helm upgrade](https://github.com/helm/helm/blob/master/docs/helm/helm_upgra
 $ helm upgrade --install my-release codecademy/rails
 ```
 
-### To 2.0.0
+### To 2.1.1
 
 - `envs` was refactored from a list to a map, due to a mistake in overriding, and to help with simplicity. See [this Helm issue](https://github.com/helm/helm/issues/3486). Major version bumped because the new format is not backwards compatible, even though it does fix a bug in overriding.
     - Before:
@@ -93,7 +93,8 @@ image.tag | Image tag | `0.1.0`
 image.pullPolicy | Image pull policy | `IfNotPresent`
 nameOverride | String to partially override rails.fullname template with a string (will prepend the release name) | `nil`
 fullnameOverride | String to fully override rails.fullname template with a string | `nil`
-envs | Map of standard environment variables | `nil`
+envs | Map of standard environment variables (see example in `values.yaml`) | `{}`
+envsSecrets | Map of environment variables to draw from secrets (see example in `values.yaml`) | `{}`
 envsTemplate | YAML block literal string for dynamic environment variables using Chart template expressions | `''`
 envFromSecret | Kubernetes Secret name from which to pull a list of environment variables | `''`
 service.type | Kubernetes Service type | `ClusterIP`

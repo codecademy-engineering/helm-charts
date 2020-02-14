@@ -31,12 +31,12 @@ fullnameOverride: ""
 ## Because this is a map you may override only the envs you wish in additional
 ## values files.
 ## Ref: https://github.com/helm/helm/issues/3486
-envs:
+envs: {}
   # EXAMPLE_SIMPLE_STRING: foo
   # ANOTHER_KEY: bar
 
 ## See "envs" above.
-envsSecrets:
+envsSecrets: {}
   # EXAMPLE_FROM_SECRET:
   #   name: auth
   #   key: password
