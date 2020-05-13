@@ -6,4 +6,4 @@ chart-dirs:
   - charts
 excluded-charts:
   - scalyr
-helm-extra-args: --timeout 600
+helm-extra-args: --timeout 600s
