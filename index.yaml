@@ -3,6 +3,20 @@ entries:
   rails:
   - apiVersion: v1
     appVersion: 0.1.0
+    created: "2020-05-13T20:40:32.09169116Z"
+    description: Rails
+    digest: f72be25061fbac75382f20ea797932433e392212edac7e4fe4259f82df6a5455
+    home: https://rubyonrails.org/
+    icon: https://rubyonrails.org/images/rails-logo.svg
+    maintainers:
+    - email: scott@r6by.com
+      name: scottrigby
+    name: rails
+    urls:
+    - https://github.com/codecademy-engineering/helm-charts/releases/download/rails-2.1.2/rails-2.1.2.tgz
+    version: 2.1.2
+  - apiVersion: v1
+    appVersion: 0.1.0
     created: "2020-02-14T16:54:24.68481884Z"
     description: Rails
     digest: 2cd8636c60c40f7f164309e8100c16c891645df9aab9f7546aeaf96fb4b7c9dc
@@ -113,6 +127,26 @@ entries:
     - https://codecademy-engineering.github.io/helm-charts/rails-0.1.1.tgz
     version: 0.1.1
   scalyr:
+  - apiVersion: v1
+    appVersion: v2.0.46
+    created: "2020-05-13T20:40:32.198071533Z"
+    description: Scalyr Agent
+    digest: 81eca53971967c7d0b575f4899b4c1bc3b5b3f983f2e967a584d1094f5ac261c
+    home: https://www.scalyr.com
+    icon: https://www.scalyr.com/s2/src/img/logo-reverse.png
+    keywords:
+    - monitoring
+    - alerting
+    - logging
+    maintainers:
+    - email: scott@r6by.com
+      name: scottrigby
+    name: scalyr
+    sources:
+    - https://www.scalyr.com/help/install-agent-kubernetes
+    urls:
+    - https://github.com/codecademy-engineering/helm-charts/releases/download/scalyr-0.2.3/scalyr-0.2.3.tgz
+    version: 0.2.3
   - apiVersion: v1
     appVersion: v2.0.46
     created: "2020-01-13T23:04:40.915527932Z"
