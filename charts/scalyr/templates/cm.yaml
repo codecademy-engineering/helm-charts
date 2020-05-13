@@ -9,8 +9,12 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 data:
   k8s_cluster: {{ .Values.scalyr.config.k8sCluster }}
+  {{ if .Values.scalyr.config.scalyrServer }}
   scalyr_server: {{ .Values.scalyr.config.scalyrServer }}
+  {{ end }}
+  {{ if .Values.scalyr.config.k8sEventsDisable }}
   k8s_events_disable: {{ .Values.scalyr.config.k8sEventsDisable }}
+  {{ end }}
 ---
 {{ if .Values.scalyr.config.agentD.create }}
 apiVersion: v1
