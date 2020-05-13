@@ -4,4 +4,6 @@ remote: origin
 target-branch: master
 chart-dirs:
   - charts
+excluded-charts:
+  - scalyr
 helm-extra-args: --timeout 600
