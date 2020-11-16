@@ -19,7 +19,10 @@ spec:
         app.kubernetes.io/name: {{ include "rails.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
-    {{- with .Values.image.pullSecrets }}
+      {{- if .Values.serviceAccountName }}
+      serviceAccountName: {{ .Values.serviceAccountName }}
+      {{- end }}
+{{- with .Values.image.pullSecrets }}
       imagePullSecrets:
 {{ toYaml . | indent 8 }}
     {{- end }}
