@@ -53,7 +53,7 @@ spec:
                   optional: true
             {{- end }}
             - name: SCALYR_REPORT_CONTAINER_METRICS
-              value: {{ .Values.scalyr.config.reportContainerMetrics }}
+              value: "{{ .Values.scalyr.config.reportContainerMetrics }}"
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:

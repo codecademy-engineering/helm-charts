@@ -10,4 +10,4 @@ keywords:
 name: scalyr
 sources:
   - https://www.scalyr.com/help/install-agent-kubernetes
-version: 0.2.4
+version: 0.2.5
