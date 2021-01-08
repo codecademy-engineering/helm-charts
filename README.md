@@ -16,7 +16,7 @@ Once Helm is set up properly, add the repo as follows:
 $ helm repo add codecademy https://codecademy-engineering.github.io/helm-charts
 ```
 
-You can then run `helm search codecademy` to see the charts.
+You can then run `helm search repo codecademy` to see the charts.
 
 ## Contribution Guidelines
 

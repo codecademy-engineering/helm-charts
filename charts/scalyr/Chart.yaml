@@ -7,10 +7,7 @@ keywords:
   - monitoring
   - alerting
   - logging
-maintainers:
-  - email: scott@r6by.com
-    name: scottrigby
 name: scalyr
 sources:
   - https://www.scalyr.com/help/install-agent-kubernetes
-version: 0.2.3
+version: 0.2.4
