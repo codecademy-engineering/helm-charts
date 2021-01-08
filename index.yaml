@@ -143,6 +143,23 @@ entries:
   scalyr:
   - apiVersion: v1
     appVersion: v2.0.46
+    created: "2021-01-08T19:38:50.994900439Z"
+    description: Scalyr Agent
+    digest: 3141cf1aa39ca29932455d9736abfbf2b68d382174b9f1a9f5b75a2e167db34a
+    home: https://www.scalyr.com
+    icon: https://www.scalyr.com/s2/src/img/logo-reverse.png
+    keywords:
+    - monitoring
+    - alerting
+    - logging
+    name: scalyr
+    sources:
+    - https://www.scalyr.com/help/install-agent-kubernetes
+    urls:
+    - https://github.com/codecademy-engineering/helm-charts/releases/download/scalyr-0.2.4/scalyr-0.2.4.tgz
+    version: 0.2.4
+  - apiVersion: v1
+    appVersion: v2.0.46
     created: "2020-05-13T20:40:32.198071533Z"
     description: Scalyr Agent
     digest: 81eca53971967c7d0b575f4899b4c1bc3b5b3f983f2e967a584d1094f5ac261c
