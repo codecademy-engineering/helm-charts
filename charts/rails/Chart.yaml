@@ -4,7 +4,7 @@ description: Rails
 home: https://rubyonrails.org/
 icon: https://rubyonrails.org/images/rails-logo.svg
 maintainers:
-  - email: scott@r6by.com
-    name: scottrigby
+  - email: devops@codecademy.com # pragma: allowlist secret
+    name: devops
 name: rails
 version: 2.1.3
