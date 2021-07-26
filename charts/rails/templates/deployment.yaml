@@ -39,22 +39,13 @@ spec:
             - secretRef:
                 name: {{ .Values.envFromSecret }}
           {{- end }}
-          {{- if or .Values.envs .Values.envsSecrets .Values.envsTemplate }}
           env:
-            {{- range $key, $value := .Values.envs }}
-            - name: {{ $key }}
-              value: {{ $value | quote }}
-            {{- end }}
-            {{- range $key, $value := .Values.envsSecrets }}
-            - name: {{ $key }}
-              valueFrom:
-                secretKeyRef:
-                  {{- toYaml $value | nindent 18 }}
-            {{- end }}
             {{- with .Values.envsTemplate }}
             {{ tpl . $ | nindent 12 }}
             {{- end }}
-          {{- end }}
+            {{- with .Values.envs }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
