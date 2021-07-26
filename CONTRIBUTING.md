@@ -9,7 +9,7 @@ The Developer Certificate of Origin (DCO) is a lightweight way for contributors 
 ```
 This is my commit message
 
-Signed-off-by: Random J Developer <random@developer.example.org>
+Signed-off-by: Random J Developer <randomdeveloper@example.com>
 ```
 
 See `git help commit`:
