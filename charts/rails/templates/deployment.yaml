@@ -52,7 +52,7 @@ spec:
                   {{- toYaml $value | nindent 18 }}
             {{- end }}
             {{- with .Values.envsTemplate }}
-            {{ tpl . $ | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
             {{- end }}
           {{- end }}
           ports:

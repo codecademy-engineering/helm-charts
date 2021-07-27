@@ -55,7 +55,7 @@ envsSecrets: {}
 ## 'envsSecrets' configuration above should be used for simple environemnt
 ## variables - when dynamic, templated expressions are not required.
 ##
-envsTemplate: |-
+envsTemplate: {}
 #   - name: EXAMPLE_TEMPLATE_CONFIG_VALUE
 #     value: {{ .Values.config.example | quote }}
 #   - name: EXAMPLE_TEMPLATE_RELEASE_VALUE
