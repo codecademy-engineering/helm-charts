@@ -41,7 +41,7 @@ spec:
           {{- end }}
           {{- if or .Values.envs .Values.envsSecrets .Values.envsTemplate }}
           env:
-          {{- range $key, $value := .Values.envs }}
+            {{- range $key, $value := .Values.envs }}
             - name: {{ $key }}
               value: {{ $value | quote }}
             {{- end }}
