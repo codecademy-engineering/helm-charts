@@ -34,7 +34,7 @@ spec:
             pathType: ImplementationSpecific
             backend:
               service:
-                name: {{ $fullName }}-web
+                name: {{ $fullName }}
                 port:
                   name: http
         {{- end }}
