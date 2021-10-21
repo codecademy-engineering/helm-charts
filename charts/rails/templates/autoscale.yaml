@@ -8,7 +8,7 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: {{ include "rails.fullname" . }}
-  minReplicas: {{ .Values.auoscaler.minReplicas }}
+  minReplicas: {{ .Values.autoscaler.minReplicas }}
   maxReplicas: {{ .Values.autoscaler.maxReplicas }}
   metrics:
   {{- with .Values.metrics }}
