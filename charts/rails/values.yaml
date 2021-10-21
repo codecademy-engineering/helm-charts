@@ -90,6 +90,9 @@ ingress:
       hosts:
         - rails.test
 
+autoscaler:
+  enabled: false
+
 ## To-do: Temporarily comment these out in order to use other handlers. The
 ## underlying issue is that Helm overwrite null feature I indtroduced in
 ## https://github.com/helm/helm/pull/2648 does not deep merge.
