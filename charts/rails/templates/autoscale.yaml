@@ -1,0 +1,18 @@
+{{- if .Values.autoscaler.enabled }}
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "rails.fullname" . }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "rails.fullname" . }}
+  minReplicas: {{ .Values.auoscaler.minReplicas }}
+  maxReplicas: {{ .Values.autoscaler.maxReplicas }}
+  metrics:
+  {{- with .Values.metrics }}
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{- end }}
