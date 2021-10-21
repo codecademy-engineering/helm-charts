@@ -7,4 +7,4 @@ maintainers:
   - email: devops@codecademy.com  # pragma: allowlist secret
     name: devops
 name: rails
-version: 2.3.0
+version: 2.3.1
