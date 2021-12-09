@@ -104,3 +104,16 @@ datadog: {}
   # env: production
   # service: service_name
   # version: version
+
+pre_release_job:
+  enabled: true
+  image:
+    repository: alpine
+    tag: "3.15"
+    pullPolicy: IfNotPresent
+  command:
+    - echo
+    - "hello world"
+  env: []
+    # - name: FOO
+    #   value: bar
