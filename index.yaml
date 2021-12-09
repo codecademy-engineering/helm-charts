@@ -389,6 +389,18 @@ entries:
     version: 0.1.0
   service:
   - apiVersion: v2
+    created: "2021-12-09T22:50:52.42237087Z"
+    description: A generic k8s service chart
+    digest: 4d6fda2bae1fda2632b1a707d24787cd23df7bc774f8050418543cde73cb7502
+    maintainers:
+    - email: devops@codecademy.com
+      name: devops
+    name: service
+    type: application
+    urls:
+    - https://github.com/codecademy-engineering/helm-charts/releases/download/service-0.3.0/service-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
     created: "2021-12-09T21:47:22.915088603Z"
     description: A generic k8s service chart
     digest: bfb0a272615a352145a8a2bc825a120666908eac57e044f656ef74c3bc9635f4
@@ -412,4 +424,4 @@ entries:
     urls:
     - https://github.com/codecademy-engineering/helm-charts/releases/download/service-0.1.0/service-0.1.0.tgz
     version: 0.1.0
-generated: "2021-12-09T21:47:22.915187804Z"
+generated: "2021-12-09T22:50:52.422489971Z"
