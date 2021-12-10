@@ -117,3 +117,7 @@ pre_release_job:
   env: []
     # - name: FOO
     #   value: bar
+  securityContext: {}
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1001

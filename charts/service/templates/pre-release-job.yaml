@@ -29,6 +29,8 @@ spec:
       restartPolicy: Never
       containers:
         - name: {{ include "service.fullname" . }}-pre-release-job
+          securityContext:
+            {{- toYaml .Values.pre_release_job.securityContext | nindent 12 }}
           image: "{{ .Values.pre_release_job.image.repository }}:{{ .Values.pre_release_job.image.tag }}"
           imagePullPolicy: {{ .Values.pre_release_job.image.pullPolicy }}
           command:
