@@ -105,7 +105,7 @@ datadog: {}
   # service: service_name
   # version: version
 
-pre_release_job:
+preReleaseJob:
   enabled: true
   image:
     repository: alpine
@@ -121,3 +121,4 @@ pre_release_job:
     # readOnlyRootFilesystem: true
     # runAsNonRoot: true
     # runAsUser: 1001
+  backoffLimit: 0
