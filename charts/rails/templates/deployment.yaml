@@ -7,6 +7,13 @@ metadata:
     helm.sh/chart: {{ include "rails.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- with .Values.datadog }}
+    {{- if and .service .env }}
+    tags.datadoghq.com/env: {{ .env }}
+    tags.datadoghq.com/service: {{ .service }}
+    tags.datadoghq.com/version: {{ .version | quote }}
+    {{- end }}
+    {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -53,6 +60,26 @@ spec:
             {{- end }}
             {{- with .Values.envsTemplate }}
             {{- toYaml . | nindent 12 }}
+            {{- end }}
+            {{- with .Values.datadog }}
+            {{- if and .service .env }}
+            - name: DD_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DD_ENV
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/env']
+            - name: DD_SERVICE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/service']
+            - name: DD_VERSION
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/version']
+            {{- end }}
             {{- end }}
           {{- end }}
           ports:
