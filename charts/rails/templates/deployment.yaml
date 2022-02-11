@@ -46,7 +46,7 @@ spec:
           env:
 {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .Values.geoip.securityContext }}
+          {{- with .Values.initContainer.securityContext }}
           securityContext:
 {{ toYaml . | nindent 12 }}
           {{- end }}
