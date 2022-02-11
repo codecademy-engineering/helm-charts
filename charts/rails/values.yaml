@@ -130,3 +130,5 @@ tolerations: []
 affinity: {}
 
 securityContext: {}
+initContainer:
+  enabled: false
