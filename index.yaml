@@ -3,6 +3,20 @@ entries:
   rails:
   - apiVersion: v1
     appVersion: 0.1.0
+    created: "2022-03-25T15:19:15.866058796Z"
+    description: Rails
+    digest: ee5bb27112b95d38d46c002c5f54c4d257aba1f0029f568fe3ae4ce120b75c8d
+    home: https://rubyonrails.org/
+    icon: https://rubyonrails.org/images/rails-logo.svg
+    maintainers:
+    - email: devops@codecademy.com
+      name: devops
+    name: rails
+    urls:
+    - https://github.com/codecademy-engineering/helm-charts/releases/download/rails-2.5.3/rails-2.5.3.tgz
+    version: 2.5.3
+  - apiVersion: v1
+    appVersion: 0.1.0
     created: "2022-02-11T21:28:12.959655961Z"
     description: Rails
     digest: 26e7e53449840bbce0fbcd269f0c1fcdd9b4df6061cb7f0f64976cfe28ae2c07
@@ -528,4 +542,4 @@ entries:
     urls:
     - https://github.com/codecademy-engineering/helm-charts/releases/download/service-0.1.0/service-0.1.0.tgz
     version: 0.1.0
-generated: "2022-02-11T21:28:12.959984862Z"
+generated: "2022-03-25T15:19:15.866247495Z"
