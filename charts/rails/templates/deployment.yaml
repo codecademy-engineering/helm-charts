@@ -25,6 +25,11 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "rails.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
+        {{- if and .service .env }}
+        tags.datadoghq.com/env: {{ .env }}
+        tags.datadoghq.com/service: {{ .service }}
+        tags.datadoghq.com/version: {{ .version | quote }}
+        {{- end }}
     spec:
       {{- if .Values.serviceAccountName }}
       serviceAccountName: {{ .Values.serviceAccountName }}
