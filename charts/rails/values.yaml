@@ -132,3 +132,6 @@ affinity: {}
 securityContext: {}
 initContainer:
   enabled: false
+
+podDisruptionBudget:
+  maxUnavailable: "25%"
