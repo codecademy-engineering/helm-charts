@@ -122,3 +122,6 @@ preReleaseJob:
     # runAsNonRoot: true
     # runAsUser: 1001
   backoffLimit: 0
+
+podDisruptionBudget:
+  maxUnavailable: "25%"
