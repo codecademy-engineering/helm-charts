@@ -127,5 +127,8 @@ preReleaseJob:
     # runAsUser: 1001
   backoffLimit: 0
 
+initContainer:
+  enabled: false
+
 podDisruptionBudget:
   maxUnavailable: "25%"
