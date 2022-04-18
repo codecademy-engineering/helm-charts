@@ -112,16 +112,16 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           livenessProbe:
-{{- toYaml .Values.livenessProbe | indent 12 }}
+{{ toYaml .Values.livenessProbe | indent 12 }}
           readinessProbe:
-{{- toYaml .Values.readinessProbe | indent 12 }}
+{{ toYaml .Values.readinessProbe | indent 12 }}
           startupProbe:
-{{- toYaml .Values.startupProbe | indent 12 }}
+{{ toYaml .Values.startupProbe | indent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- with .Values.securityContext }}
           securityContext:
-            {{- toYaml . | indent 12 }}
+{{ toYaml . | indent 12 }}
           {{- end }}
           {{- with .Values.volumeMounts }}
           volumeMounts:
