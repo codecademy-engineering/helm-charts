@@ -47,15 +47,15 @@ spec:
           imagePullPolicy: {{ .Values.initContainer.image.pullPolicy }}
           {{- with .Values.initContainer.volumeMounts }}
           volumeMounts:
-            {{- toYaml . | nindent 12 }}
+{{- toYaml . | nindent 12 }}
           {{- end }}
           {{- with .Values.initContainer.envSecret }}
           env:
-            {{- toYaml . | nindent 12 }}
+{{- toYaml . | nindent 12 }}
           {{- end }}
           {{- with .Values.initContainer.securityContext }}
           securityContext:
-            {{ toYaml . | nindent 12 }}
+{{ toYaml . | nindent 12 }}
           {{- end }}
       {{- end }}
       containers:
@@ -112,13 +112,11 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           livenessProbe:
-            {{- toYaml .Values.livenessProbe | indent 12 }}
+{{- toYaml .Values.livenessProbe | indent 12 }}
           readinessProbe:
-            {{- toYaml .Values.readinessProbe | indent 12 }}
-          {{- with .Values.startupProbe }}
+{{- toYaml .Values.readinessProbe | indent 12 }}
           startupProbe:
-            {{- toYaml . | indent 12 }}
-          {{- end }}
+{{- toYaml .Values.startupProbe | indent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- with .Values.securityContext }}
@@ -127,7 +125,7 @@ spec:
           {{- end }}
           {{- with .Values.volumeMounts }}
           volumeMounts:
-            {{- toYaml . | nindent 12 }}
+{{- toYaml . | nindent 12 }}
           {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
