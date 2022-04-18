@@ -111,6 +111,21 @@ datadog: {}
 
 preReleaseJob:
   enabled: false
+  image:
+    repository: alpine
+    tag: "3.15"
+    pullPolicy: IfNotPresent
+  command:
+    - echo
+    - "hello world"
+  env: []
+    # - name: FOO
+    #   value: bar
+  securityContext: {}
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1001
+  backoffLimit: 0
 
 podDisruptionBudget:
   maxUnavailable: "25%"
