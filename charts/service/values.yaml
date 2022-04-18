@@ -46,6 +46,11 @@ env: []
   #       name: my-secret
   #       key: api-key
   #       optional: true
+
+# Environment variables in key-value syntax
+envKeyValue: {}
+  # FOO: bar
+
 ports:
   - name: http
     containerPort: 80
