@@ -46,7 +46,7 @@ spec:
           volumeMounts:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .Values.initContainer.envSecret }}
+          {{- with .Values.initContainer.env }}
           env:
             {{- toYaml . | nindent 12 }}
           {{- end }}
