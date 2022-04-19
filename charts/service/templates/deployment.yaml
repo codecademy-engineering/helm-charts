@@ -4,6 +4,10 @@ metadata:
   name: {{ include "service.fullname" . }}
   labels:
     {{- include "service.labels" . | nindent 4 }}
+    app.kubernetes.io/name: {{ include "service.name" . }}
+    helm.sh/chart: {{ include "service.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
     {{- with .Values.datadog }}
     tags.datadoghq.com/env: {{ .env }}
     tags.datadoghq.com/service: {{ .service }}
@@ -16,6 +20,8 @@ spec:
   selector:
     matchLabels:
       {{- include "service.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/name: {{ include "service.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
     {{- with .Values.podAnnotations }}
@@ -24,6 +30,8 @@ spec:
     {{- end }}
       labels:
         {{- include "service.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/name: {{ include "service.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
         {{- with .Values.datadog }}
         tags.datadoghq.com/env: {{ .env }}
         tags.datadoghq.com/service: {{ .service }}
