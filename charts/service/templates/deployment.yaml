@@ -35,8 +35,6 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       serviceAccountName: {{ include "service.serviceAccountName" . }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       {{- if .Values.initContainer.enabled }}
       initContainers:
         - name: {{ .Values.initContainer.name }}
