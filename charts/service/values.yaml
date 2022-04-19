@@ -17,7 +17,7 @@ fullnameOverride: ""
 podAnnotations: {}
 
 securityContext:
-  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: true
   runAsNonRoot: true
   runAsUser: 101
 
