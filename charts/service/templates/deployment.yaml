@@ -48,10 +48,8 @@ spec:
           env:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .Values.initContainer.securityContext }}
           securityContext:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
+            {{- toYaml .Values.initContainer.securityContext | nindent 12 }}
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}
@@ -103,10 +101,6 @@ spec:
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          {{- with .Values.securityContext }}
-          securityContext:
-            {{- toYaml . | indent 12 }}
-          {{- end }}
           {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
