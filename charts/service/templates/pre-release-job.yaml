@@ -1,13 +1,10 @@
-{{ if .Values.preReleaseJob.enabled }}
+{{- if .Values.preReleaseJob.enabled }}
 apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ include "service.fullname" . }}-pre-release-job
   labels:
-    helm.sh/chart: {{ include "service.chart" . }}
-    app.kubernetes.io/name: {{ include "service.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}-pre-release-job
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- include "service.labels" . | nindent 4 }}
     {{- with .Values.datadog }}
     tags.datadoghq.com/env: {{ .env }}
     tags.datadoghq.com/service: {{ .service }}
@@ -22,10 +19,7 @@ spec:
     metadata:
       name: {{ include "service.fullname" . }}-pre-release-job
       labels:
-        helm.sh/chart: {{ include "service.chart" . }}
-        app.kubernetes.io/name: {{ include "service.name" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}-pre-release-job
-        app.kubernetes.io/managed-by: {{ .Release.Service }}
+        {{- include "service.labels" . | nindent 4 }}
         {{- with .Values.datadog }}
         tags.datadoghq.com/env: {{ .env }}
         tags.datadoghq.com/service: {{ .service }}
@@ -66,4 +60,4 @@ spec:
                   fieldPath: metadata.labels['tags.datadoghq.com/version']
           {{- end }}
   backoffLimit: {{ .Values.preReleaseJob.backoffLimit }}
-{{ end }}
+{{- end }}

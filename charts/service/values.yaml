@@ -46,6 +46,11 @@ env: []
   #       name: my-secret
   #       key: api-key
   #       optional: true
+
+# Environment variables in key-value syntax
+envKeyValue: {}
+  # FOO: bar
+
 ports:
   - name: http
     containerPort: 80
@@ -61,6 +66,8 @@ readinessProbe:
     path: /
     port: http
 
+startupProbe: {}
+
 autoscaling:
   enabled: false
   minReplicas: 1
@@ -73,6 +80,8 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+volumes: {}
 
 service:
   type: ClusterIP
@@ -93,11 +102,11 @@ ingress:
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  enabled: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
+  # If not set and enabled is true, a name is generated using the fullname template
   name: ""
 
 datadog: {}
@@ -106,7 +115,7 @@ datadog: {}
   # version: version
 
 preReleaseJob:
-  enabled: true
+  enabled: false
   image:
     repository: alpine
     tag: "3.15"
@@ -122,6 +131,9 @@ preReleaseJob:
     # runAsNonRoot: true
     # runAsUser: 1001
   backoffLimit: 0
+
+initContainer:
+  enabled: false
 
 podDisruptionBudget:
   maxUnavailable: "25%"
