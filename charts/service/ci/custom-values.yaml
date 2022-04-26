@@ -9,3 +9,13 @@ autoscaling:
   minReplicas: 1
   maxReplicas: 2
   targetCPUUtilizationPercentage: 50
+
+env:
+  - name: FOO
+    value: bar
+  - name: POTATO
+    value: potato
+
+envKeyValue:
+  ABCDEF: ghijkl
+  STUFF: things
