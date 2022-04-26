@@ -10,9 +10,7 @@ metadata:
     tags.datadoghq.com/version: {{ .version | quote }}
     {{- end }}
 spec:
-{{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
-{{- end }}
   selector:
     matchLabels:
       {{- include "service.selectorLabels" . | nindent 6 }}
