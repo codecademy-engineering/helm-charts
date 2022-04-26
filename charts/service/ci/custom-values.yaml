@@ -21,10 +21,10 @@ envKeyValue:
   STUFF: things
 
 ingress:
-    enabled: true
-    annotations:
-      kubernetes.io/ingress.class: nginx
-    hosts:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
     - host: example.internal.codecademy.com
       paths:
         - '/'
