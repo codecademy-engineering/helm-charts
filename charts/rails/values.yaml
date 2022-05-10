@@ -135,3 +135,17 @@ initContainer:
 
 podDisruptionBudget:
   maxUnavailable: "25%"
+
+
+# Deployment strategy.
+# See: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
+# See: https://v1-21.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#deploymentstrategy-v1-apps
+# To overwrite the default RollingUpdate:
+#   strategy:
+#     rollingUpdate: null
+#     type: Replace
+strategy:
+  rollingUpdate:
+    maxSurge: 25%
+    maxUnavailable: 25%
+  type: RollingUpdate
