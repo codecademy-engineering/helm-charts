@@ -20,12 +20,12 @@ spec:
     matchLabels:
       app.kubernetes.io/name: {{ include "rails.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
-    strategy:
-      type: {{ .Values.strategy.type }}
+  strategy:
+    type: {{ .Values.strategy.type }}
 {{- if eq .Values.strategy.type "RollingUpdate" }}
-      rollingUpdate:
+    rollingUpdate:
 {{- with .Values.strategy.rollingUpdate }}
-{{ toYaml . | indent 8 }}
+{{ toYaml . | indent 6 }}
 {{- end}}
 {{- end}}
   template:
