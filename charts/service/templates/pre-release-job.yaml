@@ -4,7 +4,7 @@ kind: Job
 metadata:
   name: {{ include "service.fullname" . }}-pre-release-job
   labels:
-    {{- include "service.labels" . | nindent 4 }}
+    {{- include "service.labels" . | nindent 8 }}
     {{- with .Values.datadog }}
     tags.datadoghq.com/env: {{ .env }}
     tags.datadoghq.com/service: {{ .service }}
