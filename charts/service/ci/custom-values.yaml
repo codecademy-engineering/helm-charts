@@ -20,6 +20,12 @@ envKeyValue:
   ABCDEF: ghijkl
   STUFF: things
 
+image:
+  command:
+    - echo
+    - "hello"
+    - "world"
+
 ingress:
   enabled: true
   annotations:

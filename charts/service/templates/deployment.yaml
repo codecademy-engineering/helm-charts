@@ -55,7 +55,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- if .Values.image.command }}
           command:
-{{- toYaml .Values.image.command | indent 12 }}
+{{ toYaml .Values.image.command | indent 12 }}
           {{- end }}
           env:
           {{- range $key, $value := .Values.envKeyValue }}
