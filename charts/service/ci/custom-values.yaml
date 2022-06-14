@@ -22,9 +22,9 @@ envKeyValue:
 
 image:
   command:
-    - echo
-    - "hello"
-    - "world"
+    - nginx-debug
+    - '-g'
+    - 'daemon off;'
 
 ingress:
   enabled: true
