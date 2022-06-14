@@ -20,6 +20,12 @@ envKeyValue:
   ABCDEF: ghijkl
   STUFF: things
 
+image:
+  command:
+    - nginx-debug
+    - '-g'
+    - 'daemon off;'
+
 ingress:
   enabled: true
   annotations:
