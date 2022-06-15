@@ -53,15 +53,9 @@ ports:
     containerPort: 80
     protocol: TCP
 
-livenessProbe:
-  httpGet:
-    path: /
-    port: http
+livenessProbe: {}
 
-readinessProbe:
-  httpGet:
-    path: /
-    port: http
+readinessProbe: {}
 
 startupProbe: {}
 

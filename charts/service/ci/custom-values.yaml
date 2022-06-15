@@ -34,3 +34,13 @@ ingress:
     - host: example.internal.codecademy.com
       paths:
         - '/'
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
