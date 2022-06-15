@@ -14,5 +14,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args:  ['{{ include "rails.fullname" . }}:{{ .Values.service.port }}']
+      args:  ['{{ include "rails.fullname" . }}']
   restartPolicy: Never
