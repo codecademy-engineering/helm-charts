@@ -61,6 +61,7 @@ spec:
           envFrom:
             - secretRef:
                 name: {{ .Values.envFromSecret }}
+          {{- end }}
           env:
           {{- range $key, $value := .Values.envKeyValue }}
             - name: {{ $key }}
