@@ -14,6 +14,11 @@ spec:
       targetPort: {{ .Values.service.port }}
       protocol: TCP
       name: http
+    {{- if .Values.service.additionalPort }}
+    - port: {{ .Values.service.additionalPort }}
+      targetPort: {{ .Values.service.additionalPort }}
+      name: extra
+    {{- end }}
   selector:
     app.kubernetes.io/name: {{ include "rails.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
