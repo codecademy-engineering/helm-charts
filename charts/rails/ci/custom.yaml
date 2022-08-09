@@ -1,2 +1,4 @@
 service:
-  additionalPort: 4000
+  additionalPort: 
+    port: 4000
+    name: asdf
