@@ -1,2 +1,5 @@
+annotations:
+  foo: bar
+  bar: baz
 service:
   additionalPort: 4000
