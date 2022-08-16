@@ -40,6 +40,10 @@ spec:
         tags.datadoghq.com/version: {{ .version | quote }}
         {{- end }}
         {{- end }}
+    {{- with .Values.annotations }}
+    annotations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
     spec:
       {{- if .Values.serviceAccountName }}
       serviceAccountName: {{ .Values.serviceAccountName }}
