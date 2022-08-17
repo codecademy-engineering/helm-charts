@@ -42,7 +42,7 @@ spec:
         {{- end }}
     {{- with .Values.annotations }}
     annotations:
-{{ toYaml . | indent 8 }}
+{{ toYaml . | indent 6 }}
     {{- end }}
     spec:
       {{- if .Values.serviceAccountName }}
