@@ -44,3 +44,6 @@ readinessProbe:
   httpGet:
     path: /
     port: http
+
+podLabels:
+  foo: bar
