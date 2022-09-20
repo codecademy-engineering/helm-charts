@@ -50,12 +50,6 @@ envKeyValue: {}
 
 containerPort: 80
 
-livenessProbe: {}
-
-readinessProbe: {}
-
-startupProbe: {}
-
 autoscaling:
   enabled: false
 
