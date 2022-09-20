@@ -96,11 +96,11 @@ spec:
               containerPort: {{ .Values.containerPort }}
               protocol: TCP
           livenessProbe:
-            {{- toYaml .Values.livenessProbe | nindent 12 }}
+{{ toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
-            {{- toYaml .Values.readinessProbe | nindent 12 }}
+{{ toYaml .Values.readinessProbe | nindent 12 }}
           startupProbe:
-            {{- toYaml .Values.startupProbe | indent 12 }}
+{{ toYaml .Values.startupProbe | indent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           securityContext:
