@@ -45,5 +45,10 @@ readinessProbe:
     path: /
     port: http
 
+startupProbe:
+  httpGet:
+    path: /
+    port: http
+
 podLabels:
   foo: bar
