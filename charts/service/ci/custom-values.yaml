@@ -52,3 +52,10 @@ startupProbe:
 
 podLabels:
   foo: bar
+
+annotations:
+  abc: def
+
+additionalPort:
+  port: 10000
+  name: potato
