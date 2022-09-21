@@ -30,6 +30,10 @@ spec:
         tags.datadoghq.com/service: {{ .service }}
         tags.datadoghq.com/version: {{ .version | quote }}
         {{- end }}
+      {{- with .Values.annotations }}
+      annotations:
+{{ toYaml . | indent 8 }}
+      {{- end }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -95,6 +99,11 @@ spec:
             - name: http
               containerPort: {{ .Values.containerPort }}
               protocol: TCP
+            {{- with .Values.service.additionalPort }}
+            - name: {{ .name }}
+              containerPort: {{ .port }}
+              protocol: TCP
+            {{- end }}
           livenessProbe:
 {{ toYaml .Values.livenessProbe | indent 12 }}
           readinessProbe:
