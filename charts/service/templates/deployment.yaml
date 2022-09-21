@@ -96,9 +96,9 @@ spec:
               containerPort: {{ .Values.containerPort }}
               protocol: TCP
           livenessProbe:
-{{ toYaml .Values.livenessProbe | nindent 12 }}
+{{ toYaml .Values.livenessProbe | indent 12 }}
           readinessProbe:
-{{ toYaml .Values.readinessProbe | nindent 12 }}
+{{ toYaml .Values.readinessProbe | indent 12 }}
           startupProbe:
 {{ toYaml .Values.startupProbe | indent 12 }}
           resources:
