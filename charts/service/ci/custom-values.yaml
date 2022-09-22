@@ -76,7 +76,7 @@ autoscaler:
 
 cronJobs:
   - name: foo
-    command:  ["echo"]
+    command: ["echo"]
     args: ["foo"]
     env:
       - name: FOO
