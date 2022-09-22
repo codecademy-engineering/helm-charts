@@ -59,3 +59,19 @@ annotations:
 additionalPort:
   port: 10000
   name: potato
+
+cronJobs:
+  - name: foo
+    command:  ["echo"]
+    args: ["foo"]
+    env:
+      - name: FOO
+        value: bar
+    resources:
+      requests:
+        cpu: 10m
+        memory: 50Mi
+      limits:
+        cpu: 10m
+        memory: 50Mi
+    schedule: "0 0 * * *"
