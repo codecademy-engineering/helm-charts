@@ -19,6 +19,7 @@ env:
 envKeyValue:
   ABCDEF: ghijkl
   STUFF: things
+  NUMBER: 7
 
 image:
   command:
