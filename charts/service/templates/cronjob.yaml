@@ -5,7 +5,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ $fullname . }}-{{ .name }} 
+  name: {{ $fullname }}-{{ .name }} 
   labels:
     {{- $labels | nindent 4 }}
 spec:
