@@ -1,6 +1,9 @@
 {{- $fullname := include "service.fullname" . -}}
 {{- $labels := include "service.labels" . -}}
 {{- $serviceAccountName := include "service.serviceAccountName" . -}}
+{{- $image := .Values.image.repository -}}
+{{- $tag := .Values.image.tag | default .Chart.AppVersion -}}
+{{- $imagePullPolicy := .Values.image.imagePullPolicy -}}
 {{- range .Values.cronJobs }}
 ---
 apiVersion: batch/v1
@@ -18,8 +21,8 @@ spec:
         spec:
           serviceAccountName: {{ $serviceAccountName }}
           containers:
-          - image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-            imagePullPolicy: {{ .Values.image.imagePullPolicy }}
+          - image: "{{ $image }}:{{ $tag }}"
+            imagePullPolicy: {{ $imagePullPolicy }}
             name: {{ .name }}
             {{- with .env }}
             env:
