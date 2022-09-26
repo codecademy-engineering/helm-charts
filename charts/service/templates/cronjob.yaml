@@ -1,13 +1,13 @@
-{{- $release_name := include "service.fullname" }}
-{{- $labels := include "service.labels" }}
+{{- $fullname := include "service.fullname" . }}
+{{- $labels := include "service.labels" . }}
 {{- with .Values.cronJobs }}
 ---
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ .Release.Name . }}-{{ .name }} 
+  name: {{ $fullname . }}-{{ .name }} 
   labels:
-    {{- include "service.labels" . | nindent 4 }}
+    {{- $labels | nindent 4 }}
 spec:
   jobTemplate:
     spec:
