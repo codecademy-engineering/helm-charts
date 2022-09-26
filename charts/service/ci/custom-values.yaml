@@ -76,8 +76,8 @@ autoscaler:
 
 cronJobs:
   - name: foo
-    command: ["echo"]
-    args: ["foo"]
+    command: ["nginx"]
+    args: ["-v"]
     env:
       - name: FOO
         value: bar
