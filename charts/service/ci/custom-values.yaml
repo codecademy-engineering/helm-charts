@@ -62,7 +62,7 @@ additionalPort:
   name: potato
 
 autoscaler:
-  enabled: true
+  enabled: false
   minReplicas: 1
   maxReplicas: 2
   metrics:
