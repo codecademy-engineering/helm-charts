@@ -1,5 +1,6 @@
 {{- $fullname := include "service.fullname" . -}}
 {{- $labels := include "service.labels" . -}}
+{{- $serviceAccountName := include "service.serviceAccountName" . -}}
 {{- range .Values.cronJobs }}
 ---
 apiVersion: batch/v1
@@ -15,11 +16,7 @@ spec:
         metadata:
           labels:
         spec:
-          {{- with .serviceAccount }}
-          {{- if hasKey . "name" }}
-          serviceAccountName: {{ .name }}
-          {{- end }}
-          {{- end }}
+          serviceAccountName: {{ $serviceAccountName }}
           containers:
           - image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
             imagePullPolicy: {{ .Values.image.imagePullPolicy }}
