@@ -3,7 +3,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ include "service.fullname" . }}-{{ .name }}
+  name: {{ .Release.Name . }}-{{ .name }} 
   labels:
     {{- include "service.labels" . | nindent 4 }}
 spec:
