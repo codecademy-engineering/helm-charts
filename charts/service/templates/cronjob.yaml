@@ -15,8 +15,10 @@ spec:
         metadata:
           labels:
         spec:
-          {{- if hasKey .serviceAccount "name" }}
-          serviceAccountName: {{ .serviceAccount.name }}
+          {{- with .serviceAccount }}
+          {{- if hasKey . "name" }}
+          serviceAccountName: {{ .name }}
+          {{- end }}
           {{- end }}
           containers:
           - image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -35,7 +37,9 @@ spec:
             args:
               {{- toYaml . | nindent 14 }}
               {{- end }}
-          restartPolicy: {{ .restartPolicy }}
+          {{- with .restartPolicy }}
+          restartPolicy: {{ . }}
+          {{- end }}
           resources:
             {{- toYaml .resources | nindent 14 }}
   schedule: {{ .schedule }}
