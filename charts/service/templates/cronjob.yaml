@@ -37,10 +37,10 @@ spec:
             args:
               {{- toYaml . | nindent 14 }}
               {{- end }}
+            resources:
+              {{- toYaml .resources | nindent 14 }} 
           {{- with .restartPolicy }}
           restartPolicy: {{ .restartPolicy | default "OnFailure" }}
           {{- end }}
-          resources:
-            {{- toYaml .resources | nindent 14 }}
   schedule: {{ .schedule }}
 {{- end }}
