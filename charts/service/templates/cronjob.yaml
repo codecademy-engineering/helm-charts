@@ -39,8 +39,6 @@ spec:
               {{- end }}
             resources:
               {{- toYaml .resources | nindent 14 }} 
-          {{- with .restartPolicy }}
           restartPolicy: {{ .restartPolicy | default "OnFailure" }}
-          {{- end }}
-  schedule: "{{ .schedule }}"
+  schedule: {{ .schedule | quote }}
 {{- end }}
