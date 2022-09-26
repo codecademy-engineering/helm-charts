@@ -1,3 +1,5 @@
+{{- $release_name := include "service.fullname" }}
+{{- $labels := include "service.labels" }}
 {{- with .Values.cronJobs }}
 ---
 apiVersion: batch/v1
