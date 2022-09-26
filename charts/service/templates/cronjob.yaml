@@ -1,6 +1,6 @@
 {{- $fullname := include "service.fullname" . -}}
 {{- $labels := include "service.labels" . -}}
-{{- with .Values.cronJobs }}
+{{- range .Values.cronJobs }}
 ---
 apiVersion: batch/v1
 kind: CronJob
