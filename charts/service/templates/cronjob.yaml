@@ -42,5 +42,5 @@ spec:
           {{- with .restartPolicy }}
           restartPolicy: {{ .restartPolicy | default "OnFailure" }}
           {{- end }}
-  schedule: {{ .schedule }}
+  schedule: "{{ .schedule }}"
 {{- end }}
