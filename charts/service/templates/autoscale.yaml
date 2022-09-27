@@ -3,7 +3,7 @@ apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: {{ include "service.fullname" . }}
-labels:
+  labels:
     {{- include "service.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
