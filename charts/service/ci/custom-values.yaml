@@ -54,7 +54,7 @@ annotations:
 additionalPort:
   port: 10000
   name: potato
-  
+
 autoscaling:
   enabled: true
   minReplicas: 1
