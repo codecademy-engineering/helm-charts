@@ -67,7 +67,6 @@ autoscaling:
         type: Utilization
         averageUtilization: 50
 
-
 cronJobs:
   - name: foo
     command: ["nginx"]
