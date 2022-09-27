@@ -54,7 +54,7 @@ annotations:
 additionalPort:
   port: 10000
   name: potato
-
+  
 autoscaling:
   enabled: true
   minReplicas: 1
@@ -82,4 +82,3 @@ cronJobs:
       limits:
         cpu: 10m
         memory: 50Mi
-    schedule: "* * * * *"
