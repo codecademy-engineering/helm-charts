@@ -1,0 +1,44 @@
+{{- $fullname := include "service.fullname" . -}}
+{{- $labels := include "service.labels" . -}}
+{{- $serviceAccountName := include "service.serviceAccountName" . -}}
+{{- $image := .Values.image.repository -}}
+{{- $tag := .Values.image.tag | default .Chart.AppVersion -}}
+{{- $imagePullPolicy := .Values.image.imagePullPolicy -}}
+{{- range .Values.cronJobs }}
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ $fullname }}-{{ .name }} 
+  labels:
+    {{- $labels | nindent 4 }}
+spec:
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+        spec:
+          serviceAccountName: {{ $serviceAccountName }}
+          containers:
+          - image: "{{ $image }}:{{ $tag }}"
+            imagePullPolicy: {{ $imagePullPolicy }}
+            name: {{ .name }}
+            {{- with .env }}
+            env:
+              {{- toYaml . | nindent 14 }}
+            {{- end }}
+            securityContext:
+              {{- toYaml .securityContext | nindent 14 }}
+            {{- if .command }}
+            command: {{ .command }}
+            {{- end }}
+            {{- with .args }}
+            args:
+              {{- toYaml . | nindent 14 }}
+              {{- end }}
+            resources:
+              {{- toYaml .resources | nindent 14 }} 
+          restartPolicy: {{ .restartPolicy | default "OnFailure" }}
+  schedule: {{ .schedule | quote }}
+{{- end }}
