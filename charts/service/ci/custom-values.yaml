@@ -55,10 +55,6 @@ additionalPort:
   port: 10000
   name: potato
 
-securityContext:
-  runAsNonRoot: true
-  runAsUser: 101
-
 autoscaling:
   enabled: true
   minReplicas: 1
@@ -75,9 +71,6 @@ cronJobs:
   - name: foo
     command: ["nginx"]
     args: ["-v"]
-    securityContext:
-      runAsNonRoot: true
-      runAsUser: 101
     env:
       - name: FOO
         value: bar
