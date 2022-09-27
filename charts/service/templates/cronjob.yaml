@@ -28,10 +28,10 @@ spec:
             env:
               {{- toYaml . | nindent 14 }}
             {{- end }}
-            {{- if .Values.envFromSecret }}
+            {{- if .envFromSecret }}
             envFrom:
             - secretRef:
-                name: {{ .Values.envFromSecret }}
+                name: {{ .envFromSecret }}
             {{- end }}
             securityContext:
               {{- toYaml .securityContext | nindent 14 }}
