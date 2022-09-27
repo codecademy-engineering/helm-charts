@@ -4,6 +4,8 @@
 {{- $image := .Values.image.repository -}}
 {{- $tag := .Values.image.tag | default .Chart.AppVersion -}}
 {{- $imagePullPolicy := .Values.image.imagePullPolicy -}}
+{{- $parentEnvKeyValue := .Values.envKeyValue -}}
+{{- $parentEnv := .Values.env -}}
 {{- range .Values.cronJobs }}
 ---
 apiVersion: batch/v1
@@ -24,9 +26,18 @@ spec:
           - image: "{{ $image }}:{{ $tag }}"
             imagePullPolicy: {{ $imagePullPolicy }}
             name: {{ .name }}
-            {{- with .env }}
             env:
-              {{- toYaml . | nindent 14 }}
+            {{- if .useParentEnv }}
+            {{- range $key, $value := $parentEnvKeyValue }}
+            - name: {{ $key }}
+              value: "{{ $value }}"
+            {{- end }}
+            {{- with $parentEnv }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+            {{- end }}
+            {{- with .env }}
+              {{- toYaml . | nindent 12 }}
             {{- end }}
             {{- if .envFromSecret }}
             envFrom:

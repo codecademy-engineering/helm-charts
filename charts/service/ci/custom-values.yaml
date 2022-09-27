@@ -71,6 +71,7 @@ cronJobs:
   - name: foo
     command: ["nginx"]
     args: ["-v"]
+    useParentEnv: true
     env:
       - name: FOO
         value: bar
