@@ -50,7 +50,7 @@ envKeyValue: {}
 
 containerPort: 80
 
-autoscaler:
+autoscaling:
   enabled: false
 
 nodeSelector: {}
