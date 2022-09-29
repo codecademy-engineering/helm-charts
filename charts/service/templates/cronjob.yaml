@@ -47,12 +47,13 @@ spec:
             securityContext:
               {{- toYaml .securityContext | nindent 14 }}
             {{- if .command }}
-            command: {{ .command }}
+            command: 
+              {{- toYaml .command | nindent 14 }}
             {{- end }}
             {{- with .args }}
             args:
               {{- toYaml . | nindent 14 }}
-              {{- end }}
+            {{- end }}
             resources:
               {{- toYaml .resources | nindent 14 }} 
           restartPolicy: {{ .restartPolicy | default "OnFailure" }}
