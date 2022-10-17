@@ -48,8 +48,6 @@ env: []
 envKeyValue: {}
   # FOO: bar
 
-containerPort: 80
-
 autoscaling:
   enabled: false
 

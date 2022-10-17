@@ -95,10 +95,12 @@ spec:
                 fieldRef:
                   fieldPath: metadata.labels['tags.datadoghq.com/version']
           {{- end }}
+          {{- if .Values.containerPort }}
           ports:
             - name: http
               containerPort: {{ .Values.containerPort }}
               protocol: TCP
+          {{- end }}
             {{- with .Values.service.additionalPort }}
             - name: {{ .name }}
               containerPort: {{ .port }}
