@@ -51,6 +51,8 @@ podLabels:
 annotations:
   abc: def
 
+containerPort: 80
+
 additionalPort:
   port: 10000
   name: potato
