@@ -1,0 +1,39 @@
+resources:
+  requests:
+    cpu: 5m
+  limits:
+    cpu: 100m
+
+containerPort: 80
+
+env:
+  - name: FOO
+    value: bar
+  - name: POTATO
+    value: potato
+
+envKeyValue:
+  ABCDEF: ghijkl
+  STUFF: things
+  NUMBER: 7
+
+image:
+  command:
+    - nginx-debug
+    - '-g'
+    - 'daemon off;'
+
+annotations:
+  abc: def
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 2
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
