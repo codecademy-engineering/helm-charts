@@ -55,6 +55,8 @@ nodeSelector: {}
 
 tolerations: []
 
+hostAliases: []
+
 affinity: {}
 
 volumes: {}

@@ -85,3 +85,12 @@ cronJobs:
         cpu: 10m
         memory: 50Mi
     schedule: "* * * * *"
+
+hostAliases:
+  - ip: 0.0.0.0
+    hostnames:
+      - somehost.com
+  - ip: 10.0.0.0
+    hostnames:
+      - anotherhost.com
+      - anotherhost2.com
