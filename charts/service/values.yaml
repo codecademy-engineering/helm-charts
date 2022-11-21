@@ -51,6 +51,9 @@ envKeyValue: {}
 autoscaling:
   enabled: false
 
+keda:
+  enabled: false
+
 nodeSelector: {}
 
 tolerations: []

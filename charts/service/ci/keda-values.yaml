@@ -1,0 +1,82 @@
+resources:
+  requests:
+    cpu: 5m
+  limits:
+    cpu: 100m
+
+env:
+  - name: FOO
+    value: bar
+  - name: POTATO
+    value: potato
+
+envKeyValue:
+  ABCDEF: ghijkl
+  STUFF: things
+  NUMBER: 7
+
+image:
+  command:
+    - nginx-debug
+    - '-g'
+    - 'daemon off;'
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: example.internal.codecademy.com
+      paths:
+        - '/'
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+
+startupProbe:
+  httpGet:
+    path: /
+    port: http
+
+podLabels:
+  foo: bar
+
+annotations:
+  abc: def
+
+containerPort: 80
+
+additionalPort:
+  port: 10000
+  name: potato
+
+keda:
+  enabled: true
+  pollingInterval: 30
+  cooldownPeriod: 300
+  minReplicas: 1
+  maxReplicas: 3
+  fallback:
+    failureThreshold: 5
+    replicas: 1
+  advanced:
+    restoreToOriginalReplicaCount: true
+    behavior:
+      scaleDown:
+        stabilizationWindowSeconds: 300
+        policies:
+        - type: Percent
+          value: 100
+          periodSeconds: 15
+  triggers:
+  - type: memory
+    metricType: Utilization
+    metadata:
+      value: 100
