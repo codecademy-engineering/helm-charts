@@ -57,6 +57,32 @@ additionalPort:
   port: 10000
   name: potato
 
+cronJobs:
+  - name: foo
+    command: ["nginx"]
+    args: ["-v"]
+    useParentEnv: true
+    env:
+      - name: FOO
+        value: bar
+    resources:
+      requests:
+        cpu: 10m
+        memory: 50Mi
+      limits:
+        cpu: 10m
+        memory: 50Mi
+    schedule: "* * * * *"
+
+hostAliases:
+  - ip: 0.0.0.0
+    hostnames:
+      - somehost.com
+  - ip: 10.0.0.0
+    hostnames:
+      - anotherhost.com
+      - anotherhost2.com
+
 keda:
   enabled: true
   pollingInterval: 30
@@ -72,11 +98,11 @@ keda:
       scaleDown:
         stabilizationWindowSeconds: 300
         policies:
-        - type: Percent
-          value: 100
-          periodSeconds: 15
+          - type: Percent
+            value: 100
+            periodSeconds: 15
   triggers:
-  - type: memory
-    metricType: Utilization
-    metadata:
-      value: 100
+    - type: memory
+      metricType: Utilization
+      metadata:
+        value: "100"

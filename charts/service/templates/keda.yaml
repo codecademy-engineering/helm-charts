@@ -1,5 +1,6 @@
 {{- if .Values.keda.enabled -}}
-apiVersion: "keda.sh/v1alpha1"
+# https://keda.sh/docs/
+apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
   name: {{ include "service.fullname" . }}
@@ -14,22 +15,24 @@ spec:
   maxReplicaCount: {{ .Values.keda.maxReplicas }}
   {{- if .Values.keda.fallback }}
   fallback:
-    failureThreshold: {{ .Values.keda.fallback.failureTreshold}}
+    failureThreshold: {{ .Values.keda.fallback.failureThreshold }}
     replicas: {{ .Values.keda.fallback.replicas }}
   {{- end }}
-  {{- if .Values.keda.advanced }}
-  advanced:  # https://keda.sh/docs/2.8/concepts/scaling-deployments/#advanced
+{{- if .Values.keda.advanced }}
+  # https://keda.sh/docs/2.8/concepts/scaling-deployments/#advanced
+  advanced:
     restoreToOriginalReplicaCount: {{ .Values.keda.advanced.restoreToOriginalReplicaCount }}
-    {{- if .Values.keda.advanced.behavior }}
+{{- if .Values.keda.advanced.behavior }}
     horizontalPodAutoscalerConfig:
       behavior:
-      {{- with .Values.keda.behavior }}
-      {{- toYaml . | indent 8 }}
-      {{- end }}
-    {{- end }}
-  {{- end }}
-  triggers:  # https://keda.sh/docs/2.8/scalers/
-  {{- with .Values.keda.triggers }}
-  {{- toYaml . | indent 4 }}
-  {{- end }}
+{{- with .Values.keda.advanced.behavior }}
+{{ toYaml . | indent 8 }}
+{{ end }}
+{{- end }}
+{{- end }}
+  # https://keda.sh/docs/2.8/scalers/
+  triggers:
+{{- with .Values.keda.triggers }}
+{{ toYaml . | indent 4 }}
+{{ end }}
 {{- end }}
