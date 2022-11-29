@@ -5,6 +5,14 @@
 
 This repo collects a set of [Helm](https://helm.sh) charts curated by [Codecademy](https://www.codecademy.com).
 
+## Requirements
+* KEDA CRDs
+  ```
+  helm repo add kedacore https://kedacore.github.io/charts
+  helm repo update
+  helm install keda kedacore/keda
+  ```
+ 
 ## Usage
 
 [Helm](https://helm.sh) must be installed and initialized to use the charts.
