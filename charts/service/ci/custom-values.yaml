@@ -21,6 +21,9 @@ image:
     - '-g'
     - 'daemon off;'
 
+service:
+  enabled: false
+
 ingress:
   enabled: true
   annotations:
