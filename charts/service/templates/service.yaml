@@ -18,5 +18,11 @@ spec:
       name: {{ .name }}
     {{- end }}
   selector:
-    {{- include "service.selectorLabels" . | nindent 4 }}
+    {{- if .Values.service.selectorLabelOverride }}
+      {{- with .Values.service.selectorLabelOverride }}
+        {{- toYaml . | nindent 4 }}
+      {{- end }}
+    {{- else }}
+      {{- include "service.selectorLabels" . | nindent 4 }}
+    {{- end }}
 {{- end }}
