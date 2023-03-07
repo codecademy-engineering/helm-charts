@@ -89,6 +89,15 @@ cronJobs:
         memory: 50Mi
     schedule: "* * * * *"
 
+preReleaseJob:
+  enabled: true
+  image: 
+    repository: busybox
+    tag: latest
+    pullPolicy: IfNotFound
+  command: ["echo", "hello!"]
+  backoffLimit: 2
+
 hostAliases:
   - ip: 0.0.0.0
     hostnames:

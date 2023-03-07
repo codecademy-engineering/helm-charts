@@ -27,6 +27,7 @@ spec:
         {{- end }}
     spec:
       restartPolicy: Never
+      serviceAccountName: {{ include "service.serviceAccountName" . }}
       containers:
         - name: {{ include "service.fullname" . }}-pre-release-job
           securityContext:
