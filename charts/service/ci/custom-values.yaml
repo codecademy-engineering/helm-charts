@@ -94,7 +94,7 @@ preReleaseJob:
   image:
     repository: busybox
     tag: latest
-    pullPolicy: IfNotFound
+    pullPolicy: IfNotPresent
   command: ["echo", "hello!"]
   backoffLimit: 2
 
