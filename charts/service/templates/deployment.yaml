@@ -22,8 +22,11 @@ spec:
     {{- end }}
       labels:
         {{- include "service.selectorLabels" . | nindent 8 }}
+        {{- with .Values.service.selectorLabelOverride }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
         {{- with .Values.podLabels }}
-{{- toYaml . | nindent 8 }}
+          {{- toYaml . | nindent 8 }}
         {{- end }}
         {{- with .Values.datadog }}
         tags.datadoghq.com/env: {{ .env }}

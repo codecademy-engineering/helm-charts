@@ -70,6 +70,7 @@ service:
   enabled: true
   type: ClusterIP
   port: 80
+  selectorLabelOverride: {}
 
 ingress:
   enabled: false
