@@ -47,3 +47,4 @@ jobs:
           helm repo update
           helm install keda kedacore/keda
           ct install --config ct.yaml
+        if: steps.list-changed.outputs.changed == 'true'
