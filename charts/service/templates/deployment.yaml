@@ -11,6 +11,9 @@ metadata:
     {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  strategy:
+    rollingUpdate:
+      maxSurge: {{ .Values.rollingUpdateMaxSurge }}
   selector:
     matchLabels:
       {{- include "service.selectorLabels" . | nindent 6 }}

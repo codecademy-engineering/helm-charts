@@ -4,6 +4,9 @@
 
 replicaCount: 1
 
+# default for K8 deployments
+rollingUpdateMaxSurge: 25%
+
 image:
   repository: nginx
   pullPolicy: IfNotPresent
