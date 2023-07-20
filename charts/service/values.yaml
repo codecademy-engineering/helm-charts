@@ -4,12 +4,7 @@
 
 replicaCount: 1
 
-# K8 defaults for deployments
-strategy:
-  type: RollingUpdate
-  rollingUpdate:
-    maxSurge: 25%
-    maxUnavailable: 25%
+strategy: {}
 
 image:
   repository: nginx
