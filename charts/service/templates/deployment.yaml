@@ -11,9 +11,10 @@ metadata:
     {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  {{- with .Values.strategy }}
   strategy:
-    rollingUpdate:
-      maxSurge: {{ .Values.rollingUpdateMaxSurge }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "service.selectorLabels" . | nindent 6 }}
