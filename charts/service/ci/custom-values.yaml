@@ -100,7 +100,7 @@ hostAliases:
 
 volumes:
   - persistentVolumeClaim:
-      claimName: "Test"
+      claimName: test-efs
     storageClass:
       accessModes:
         - ReadWriteMany
