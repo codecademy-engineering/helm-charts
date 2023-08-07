@@ -97,3 +97,11 @@ hostAliases:
     hostnames:
       - anotherhost.com
       - anotherhost2.com
+
+persistentVolumeClaim:
+  - claimName: test-efs
+    storageClass:
+      accessModes:
+        - ReadWriteMany
+      name: efs
+    storage: 1Gi

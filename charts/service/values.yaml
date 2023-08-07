@@ -65,6 +65,7 @@ hostAliases: []
 affinity: {}
 
 volumes: {}
+persistentVolumeClaims: []
 
 # Defaults to port 80 on service resources
 # DO NOT CHANGE, unless you absolutely need to
