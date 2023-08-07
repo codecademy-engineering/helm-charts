@@ -98,9 +98,8 @@ hostAliases:
       - anotherhost.com
       - anotherhost2.com
 
-volumes:
-  - persistentVolumeClaim:
-      claimName: test-efs
+persistentVolumeClaim:
+  - claimName: test-efs
     storageClass:
       accessModes:
         - ReadWriteMany
