@@ -102,7 +102,7 @@ datadog: {}
   # service: service_name
   # version: version
 
-preReleaseJob:
+preReleaseJobs:
   enabled: false
   image:
     repository: alpine
@@ -123,5 +123,3 @@ preReleaseJob:
 initContainer:
   enabled: false
 
-podDisruptionBudget:
-  maxUnavailable: "25%"
