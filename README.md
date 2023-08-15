@@ -26,6 +26,21 @@ $ helm repo add codecademy https://codecademy-engineering.github.io/helm-charts
 
 You can then run `helm search repo codecademy` to see the charts.
 
+## Tests
+You can test the charts locally using a [Kind](https://kind.sigs.k8s.io/) cluster and [chart testing](https://github.com/helm/chart-testing).
+
+Once you've installed both you can run the following commands to test:
+```
+kind create cluster
+kubectl apply -f charts/service/ci/pv.yaml
+
+helm repo add kedacore https://kedacore.github.io/charts
+helm repo update
+helm install keda kedacore/keda
+
+ct install --config ct.yaml
+```
+
 ## Contribution Guidelines
 
 We'd love to have you contribute! Please refer to our [contribution guidelines](CONTRIBUTING.md) for details.
