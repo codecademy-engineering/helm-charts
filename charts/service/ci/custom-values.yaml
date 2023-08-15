@@ -103,5 +103,5 @@ persistentVolumeClaims:
     storageClass:
       accessModes:
         - ReadWriteMany
-      name: efs
+      name: manual
     storage: 1Gi
