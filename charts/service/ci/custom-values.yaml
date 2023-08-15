@@ -99,9 +99,9 @@ hostAliases:
       - anotherhost2.com
 
 persistentVolumeClaims:
-  - claimName: test-efs
+  - claimName: test-pv
     storageClass:
       accessModes:
         - ReadWriteMany
-      name: manual
+      name: standard
     storage: 1Gi

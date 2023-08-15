@@ -4,9 +4,9 @@ kind: PersistentVolume
 metadata:
   name: test-pv
   labels:
-    type: local
+    type: standard
 spec:
-  storageClassName: manual
+  storageClassName: standard
   capacity:
     storage: 1Gi
   accessModes:
