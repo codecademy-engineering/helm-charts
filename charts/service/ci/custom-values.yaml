@@ -98,10 +98,19 @@ hostAliases:
       - anotherhost.com
       - anotherhost2.com
 
-persistentVolumeClaim:
-  - claimName: test-efs
+volumeMounts:
+  - name: test-pv
+    mountPath: /tmp/
+
+volumes:
+  - name: test-pv
+    persistentVolumeClaim:
+      claimName: test-pvc
+
+persistentVolumeClaims:
+  - claimName: test-pvc
     storageClass:
       accessModes:
-        - ReadWriteMany
-      name: efs
+        - ReadWriteOnce
+      name: standard
     storage: 1Gi
