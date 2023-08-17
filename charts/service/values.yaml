@@ -102,7 +102,7 @@ datadog: {}
   # service: service_name
   # version: version
 
-preReleaseJobs:
+preReleaseJob:
   enabled: false
   image:
     repository: alpine

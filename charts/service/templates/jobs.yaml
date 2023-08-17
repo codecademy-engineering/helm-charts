@@ -45,15 +45,15 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.labels['tags.datadoghq.com/enabled']
-            - name: DATADOG__ENV
+            - name: DD_ENV
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.labels['tags.datadoghq.com/env']
-            - name: DATADOG__SERVICE
+            - name: DD_SERVICE
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.labels['tags.datadoghq.com/service']
-            - name: DATADOG__VERSION
+            - name: DD_VERSION
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.labels['tags.datadoghq.com/version']
@@ -67,7 +67,7 @@ spec:
           volumeMounts:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .persistentVolumeClaim }}
+          {{- with .persistentVolumeClaims }}
           persistentVolumeClaims:
             {{- toYaml . | nindent 12 }}
           {{- end }}
