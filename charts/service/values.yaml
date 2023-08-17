@@ -122,4 +122,3 @@ preReleaseJob:
 
 initContainer:
   enabled: false
-
