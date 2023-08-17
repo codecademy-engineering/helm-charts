@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ .persistentVolumeClaim.claimName }}
+  name: {{ .claimName }}
 spec:
   accessModes: {{ .storageClass.accessModes }}
   storageClassName: {{ .storageClass.name }}
