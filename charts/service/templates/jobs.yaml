@@ -1,0 +1,80 @@
+{{- $image := .Values.image.repository -}}
+{{- $tag := .Values.image.tag -}}
+{{- $imagePullPolicy := .Values.image.pullPolicy -}}
+{{- $datadog := .Values.datadog -}}
+{{- $securityContext := .Values.securityContext -}}
+{{- range .Values.jobs }}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .name }}
+spec:
+  {{- if .ttlSecondsAfterFinished }}
+  ttlSecondsAfterFinished: {{ .ttlSecondsAfterFinished }}
+  {{- end }}
+  template:
+    metadata:
+      labels:
+        {{- with $datadog }}
+        {{- if and .service .env }}
+        tags.datadoghq.com/enabled: {{ .enabled | quote }}
+        tags.datadoghq.com/env: {{ .env }}
+        tags.datadoghq.com/service: {{ .service }}
+        tags.datadoghq.com/version: {{ .version | quote }}
+        {{- end }}
+        {{- end }}
+    spec:
+      containers:
+        - name: {{ .name }}
+          image: "{{ $image }}:{{ $tag }}"
+          imagePullPolicy: {{ $imagePullPolicy }}
+          command:
+            {{- toYaml .command | nindent 12 }}
+          env:
+            {{- with .env }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+            {{- with $datadog }}
+            {{- if and .service .env }}
+            - name: DD_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DATADOG__ENABLED
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/enabled']
+            - name: DD_ENV
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/env']
+            - name: DD_SERVICE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/service']
+            - name: DD_VERSION
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/version']
+            {{- end }}
+            {{- end }}
+          resources:
+            {{- toYaml .resources | nindent 12 }}
+          securityContext:
+            {{- toYaml $securityContext | nindent 12 }}
+          {{- with .volumeMounts }}
+          volumeMounts:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .persistentVolumeClaims }}
+          persistentVolumeClaims:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      restartPolicy: {{ .restartPolicy | default "OnFailure" }}
+      {{- with .volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+  backoffLimit: 4
+{{- end }}
