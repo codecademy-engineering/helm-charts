@@ -50,6 +50,14 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- with .Values.minReadySeconds}}
+      minReadySeconds:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.progressDeadlineSeconds}}
+      progressDeadlineSeconds:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       serviceAccountName: {{ include "service.serviceAccountName" . }}
       {{- if .Values.initContainer.enabled }}
       initContainers:
