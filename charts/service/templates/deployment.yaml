@@ -51,6 +51,10 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       serviceAccountName: {{ include "service.serviceAccountName" . }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       {{- if .Values.initContainer.enabled }}
       initContainers:
         - name: {{ .Values.initContainer.name }}
@@ -99,7 +103,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- if .Values.image.command }}
           command:
-{{ toYaml .Values.image.command | indent 12 }}
+            {{ toYaml .Values.image.command | indent 12 }}
           {{- end }}
           {{- if .Values.envFromSecret }}
           envFrom:
@@ -107,14 +111,14 @@ spec:
                 name: {{ .Values.envFromSecret }}
           {{- end }}
           env:
-          {{- range $key, $value := .Values.envKeyValue }}
+            {{- range $key, $value := .Values.envKeyValue }}
             - name: {{ $key }}
               value: "{{ $value }}"
-          {{- end }}
-          {{- with .Values.env }}
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-          {{- with .Values.datadog }}
+            {{- end }}
+            {{- with .Values.env }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+            {{- with .Values.datadog }}
             - name: DD_AGENT_HOST
               valueFrom:
                 fieldRef:
@@ -131,24 +135,24 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.labels['tags.datadoghq.com/version']
-          {{- end }}
+            {{- end }}
           {{- if .Values.containerPort }}
           ports:
             - name: http
               containerPort: {{ .Values.containerPort }}
               protocol: TCP
-          {{- end }}
             {{- with .Values.service.additionalPort }}
             - name: {{ .name }}
               containerPort: {{ .port }}
               protocol: TCP
             {{- end }}
+          {{- end }}
           livenessProbe:
-{{ toYaml .Values.livenessProbe | indent 12 }}
+            {{ toYaml .Values.livenessProbe | indent 12 }}
           readinessProbe:
-{{ toYaml .Values.readinessProbe | indent 12 }}
+            {{ toYaml .Values.readinessProbe | indent 12 }}
           startupProbe:
-{{ toYaml .Values.startupProbe | indent 12 }}
+            {{ toYaml .Values.startupProbe | indent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           securityContext:
