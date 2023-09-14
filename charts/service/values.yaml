@@ -18,7 +18,11 @@ fullnameOverride: ""
 
 podAnnotations: {}
 
+podSecurityContext: {}
+  # https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context
+
 securityContext: {}
+  # https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context-1
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1001
