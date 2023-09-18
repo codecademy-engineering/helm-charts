@@ -1,8 +1,10 @@
 resources:
   requests:
     cpu: 5m
+    memory: 5M
   limits:
     cpu: 100m
+    memory: 10M
 
 env:
   - name: FOO

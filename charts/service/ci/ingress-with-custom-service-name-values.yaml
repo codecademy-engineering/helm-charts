@@ -1,0 +1,17 @@
+image:
+  command:
+    - nginx-debug
+    - '-g'
+    - 'daemon off;'
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: example.internal.codecademy.com
+      paths:
+        - path: '/'
+          service: 'this-service'
+        - path: '/other'
+          service: 'other-service'
