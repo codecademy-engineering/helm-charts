@@ -27,6 +27,15 @@ spec:
       http:
         paths:
           {{- range .paths }}
+          {{- if (kindIs "map" .) }}
+          - path: {{ .path }}
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ .service }}
+                port:
+                  name: http
+          {{- else }}
           - path: {{ . }}
             pathType: ImplementationSpecific
             backend:
@@ -34,6 +43,7 @@ spec:
                 name: {{ $fullName }}
                 port:
                   name: http
+          {{- end }}
           {{- end }}
     {{- end }}
 {{- end }}
