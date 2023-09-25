@@ -3,10 +3,10 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ $fullName }}
+  name: {{ $fullName }}-nlb
   labels:
     {{- include "service.labels" . | nindent 4 }}
-  {{- with .Values.ingress.annotations }}
+  {{- with merge .Values.ingress.nlbIngressClassAnnotation .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
