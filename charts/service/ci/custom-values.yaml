@@ -114,3 +114,14 @@ persistentVolumeClaims:
         - ReadWriteOnce
       name: standard
     storage: 1Gi
+
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+            - key: app
+              operator: In
+              values:
+                - 'example'
+        topologyKey: 'kubernetes.io/hostname'
