@@ -118,10 +118,10 @@ persistentVolumeClaims:
 affinity:
   podAntiAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
-      - labelSelector:
+      - topologyKey: kubernetes.io/hostname
+        labelSelector:
           matchExpressions:
             - key: app
               operator: In
               values:
                 - example
-        topologyKey: kubernetes.io/hostname
