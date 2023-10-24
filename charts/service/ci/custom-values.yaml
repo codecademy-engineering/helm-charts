@@ -123,5 +123,5 @@ affinity:
             - key: app
               operator: In
               values:
-                - 'example'
-        topologyKey: 'kubernetes.io/hostname'
+                - example
+        topologyKey: kubernetes.io/hostname
