@@ -15,11 +15,13 @@ metadata:
     "helm.sh/hook-weight": "0"
     "helm.sh/hook-delete-policy": before-hook-creation
 spec:
+  {{- if .ttlSecondsAfterFinished }}
+  ttlSecondsAfterFinished: {{ .ttlSecondsAfterFinished }}
+  {{- end }}
   template:
     metadata:
       name: {{ include "service.fullname" . }}-pre-release-job
       labels:
-        {{- include "service.labels" . | nindent 8 }}
         {{- with .Values.datadog }}
         tags.datadoghq.com/env: {{ .env }}
         tags.datadoghq.com/service: {{ .service }}
