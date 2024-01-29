@@ -32,7 +32,6 @@ You can test the charts locally using a [Kind](https://kind.sigs.k8s.io/) cluste
 Once you've installed both you can run the following commands to test:
 ```
 kind create cluster
-kubectl apply -f charts/service/ci/pv.yaml
 
 helm repo add kedacore https://kedacore.github.io/charts
 helm repo update
