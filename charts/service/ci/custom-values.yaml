@@ -88,6 +88,20 @@ cronJobs:
         cpu: 10m
         memory: 50Mi
     schedule: "* * * * *"
+  - name: bar
+    image:
+      repository: alpine
+      tag: "3.16"
+    command: ["echo", "FOOBAR"]
+    useParentEnv: false
+    resources:
+      requests:
+        cpu: 10m
+        memory: 50Mi
+      limits:
+        cpu: 10m
+        memory: 50Mi
+    schedule: "* * * * *"
 
 hostAliases:
   - ip: 0.0.0.0
