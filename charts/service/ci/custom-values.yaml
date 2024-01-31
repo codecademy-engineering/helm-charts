@@ -87,11 +87,11 @@ cronJobs:
       limits:
         cpu: 10m
         memory: 50Mi
-    schedule: "* * * * *"
+    schedule: '* * * * *'
   - name: bar
     image: alpine
-    tag: "3.16"
-    command: ["echo", "FOOBAR"]
+    tag: '3.16'
+    command: ['echo', 'FOOBAR']
     useParentEnv: false
     resources:
       requests:
@@ -100,7 +100,31 @@ cronJobs:
       limits:
         cpu: 10m
         memory: 50Mi
-    schedule: "* * * * *"
+    schedule: '* * * * *'
+    volumeMounts:
+      - name: test-cron
+        mountPath: /tmp/
+    volumes:
+      - name: test-cron
+        emptyDir: {}
+
+jobs:
+  - name: 'predeploy-job'
+    command: ['nginx', '-v']
+    resources:
+      requests:
+        cpu: 10m
+        memory: 50Mi
+      limits:
+        cpu: 10m
+        memory: 50Mi
+    volumeMounts:
+      - name: test-job
+        mountPath: /tmp/
+    volumes:
+      - name: test-job
+        emptyDir: {}
+    ttlSecondsAfterFinished: 30
 
 hostAliases:
   - ip: 0.0.0.0
