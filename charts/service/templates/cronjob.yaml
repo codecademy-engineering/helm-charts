@@ -29,7 +29,7 @@ spec:
         spec:
           serviceAccountName: {{ $serviceAccountName }}
           containers:
-          - image: "{{ .image.repository | default $image }}:{{ .image.tag | default $tag }}"
+          - image: "{{ .image | default $image }}:{{ .tag | default $tag }}"
             imagePullPolicy: {{ $imagePullPolicy }}
             name: {{ .name }}
             env:

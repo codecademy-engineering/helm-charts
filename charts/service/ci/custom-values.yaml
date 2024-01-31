@@ -89,9 +89,8 @@ cronJobs:
         memory: 50Mi
     schedule: "* * * * *"
   - name: bar
-    image:
-      repository: alpine
-      tag: "3.16"
+    image: alpine
+    tag: "3.16"
     command: ["echo", "FOOBAR"]
     useParentEnv: false
     resources:
