@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
         - name: {{ .name }}
-          image: "{{ $image }}:{{ $tag }}"
+          image: "{{ .image | default $image }}:{{ .tag | default $tag }}"
           imagePullPolicy: {{ $imagePullPolicy }}
           command:
             {{- toYaml .command | nindent 12 }}
