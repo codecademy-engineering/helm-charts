@@ -29,7 +29,7 @@ spec:
         spec:
           serviceAccountName: {{ $serviceAccountName }}
           containers:
-          - image: "{{ $image }}:{{ $tag }}"
+          - image: "{{ .image | default $image }}:{{ .tag | default $tag }}"
             imagePullPolicy: {{ $imagePullPolicy }}
             name: {{ .name }}
             env:
@@ -80,6 +80,14 @@ spec:
             {{- end }}
             resources:
               {{- toYaml .resources | nindent 14 }} 
+            {{- with .volumeMounts }}
+            volumeMounts:
+              {{- toYaml . | nindent 14 }}
+            {{- end }}
           restartPolicy: {{ .restartPolicy | default "OnFailure" }}
+          {{- with .volumes }}
+          volumes:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
   schedule: {{ .schedule | quote }}
 {{- end }}

@@ -18,7 +18,6 @@ spec:
       labels:
         {{- with $datadog }}
         {{- if and .service .env }}
-        tags.datadoghq.com/enabled: {{ .enabled | quote }}
         tags.datadoghq.com/env: {{ .env }}
         tags.datadoghq.com/service: {{ .service }}
         tags.datadoghq.com/version: {{ .version | quote }}
@@ -27,7 +26,7 @@ spec:
     spec:
       containers:
         - name: {{ .name }}
-          image: "{{ $image }}:{{ $tag }}"
+          image: "{{ .image | default $image }}:{{ .tag | default $tag }}"
           imagePullPolicy: {{ $imagePullPolicy }}
           command:
             {{- toYaml .command | nindent 12 }}
@@ -41,10 +40,6 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.hostIP
-            - name: DATADOG__ENABLED
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['tags.datadoghq.com/enabled']
             - name: DD_ENV
               valueFrom:
                 fieldRef:
