@@ -1,0 +1,5 @@
+deployment:
+  enabled: false
+
+service:
+  enabled: false

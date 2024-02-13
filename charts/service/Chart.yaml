@@ -2,7 +2,7 @@ apiVersion: v2
 name: service
 description: A generic k8s service chart
 type: application
-version: 1.8.13
+version: 1.8.14
 maintainers:
   - email: devops@codecademy.com
     name: devops
