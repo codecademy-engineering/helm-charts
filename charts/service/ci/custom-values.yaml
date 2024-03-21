@@ -129,7 +129,7 @@ jobs:
     image: alpine
     tag: '3.16'
     command: ['echo', 'FOOBAR']
-    useParentEnv: false
+    useParentEnv: true
     resources:
       requests:
         cpu: 10m
