@@ -3,6 +3,8 @@
 {{- $imagePullPolicy := .Values.image.pullPolicy -}}
 {{- $datadog := .Values.datadog -}}
 {{- $securityContext := .Values.securityContext -}}
+{{- $parentEnvKeyValue := .Values.envKeyValue -}}
+{{- $parentEnv := .Values.env -}}
 {{- range .Values.jobs }}
 ---
 apiVersion: batch/v1
@@ -31,6 +33,15 @@ spec:
           command:
             {{- toYaml .command | nindent 12 }}
           env:
+            {{- if .useParentEnv }}
+            {{- range $key, $value := $parentEnvKeyValue }}
+            - name: {{ $key }}
+              value: "{{ $value }}"
+            {{- end }}
+            {{- with $parentEnv }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+            {{- end }}
             {{- with .env }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
@@ -54,6 +65,11 @@ spec:
                   fieldPath: metadata.labels['tags.datadoghq.com/version']
             {{- end }}
             {{- end }}
+          {{- if .envFromSecret }}
+          envFrom:
+            - secretRef:
+                name: {{ .envFromSecret }}
+          {{- end }}
           resources:
             {{- toYaml .resources | nindent 12 }}
           securityContext:

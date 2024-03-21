@@ -143,6 +143,7 @@ jobs:
     volumes:
       - name: test-job
         emptyDir: {}
+    useParentEnv: true
 
 hostAliases:
   - ip: 0.0.0.0
