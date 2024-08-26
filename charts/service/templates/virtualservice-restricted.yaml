@@ -1,4 +1,4 @@
-{{ if .Values.harness.enabled }}
+{{- if .Values.harness.enabled }}
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
@@ -15,4 +15,4 @@ spec:
             host: {{ include "service.fullname" . }}
             port:
               number: {{ .Values.configmap.PORT }}
-{{ end }}
+{{- end }}

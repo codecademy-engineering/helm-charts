@@ -126,3 +126,6 @@ preReleaseJob:
 
 initContainer:
   enabled: false
+
+harness:
+  enabled: false
