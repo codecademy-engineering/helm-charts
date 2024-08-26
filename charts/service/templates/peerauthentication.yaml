@@ -1,0 +1,15 @@
+{{- if .Values.harness.enabled }}
+{{- if .Values.peerauthentication.enabled }}
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: {{ include "service.fullname" . }}
+  namespace: {{ .Values.metadata.namespace }}
+spec:
+  mtls:
+    mode: PERMISSIVE
+  selector:
+    matchLabels:
+      app: {{ include "service.fullname" . }}
+{{- end }}
+{{- end }} 

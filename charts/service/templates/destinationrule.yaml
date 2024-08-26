@@ -1,0 +1,17 @@
+{{- if .Values.harness.enabled }}
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: {{ include "service.fullname" . }}
+spec:
+  host: {{ include "service.fullname" . }}
+  trafficPolicy:
+    loadBalancer:
+      localityLbSetting:
+        enabled: True
+    outlierDetection:
+      consecutive5xxErrors: 5
+      interval: 10s
+      baseEjectionTime: 30s
+      maxEjectionPercent: 10
+{{- end }}
