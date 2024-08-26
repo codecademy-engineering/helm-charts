@@ -51,7 +51,7 @@ spec:
         {{- end }}
       {{- with .Values.annotations }}
       annotations:
-        {{- toYaml . | indent 8 }}
+        {{- toYaml . | nindent 8 }}
       {{- end }}
     spec:
       {{- with .Values.hostAliases }}
@@ -164,11 +164,11 @@ spec:
               protocol: TCP
             {{- end }}
           livenessProbe:
-            {{- toYaml .Values.livenessProbe | indent 12 }}
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
-            {{- toYaml .Values.readinessProbe | indent 12 }}
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
           startupProbe:
-            {{- toYaml .Values.startupProbe | indent 12 }}
+            {{- toYaml .Values.startupProbe | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           securityContext:
