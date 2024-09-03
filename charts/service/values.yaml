@@ -129,3 +129,6 @@ initContainer:
 
 harness:
   enabled: false
+
+verticalPodAutoscaler:
+  enabled: false
