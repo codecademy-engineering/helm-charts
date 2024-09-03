@@ -1,3 +1,4 @@
+{{- if eq .Values.harness.enabled false }}
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "service.fullname" . -}}
 apiVersion: networking.k8s.io/v1
@@ -46,4 +47,5 @@ spec:
           {{- end }}
           {{- end }}
     {{- end }}
+{{- end }}
 {{- end }}

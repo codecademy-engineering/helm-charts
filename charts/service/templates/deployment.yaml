@@ -10,6 +10,11 @@ metadata:
     tags.datadoghq.com/service: {{ .service }}
     tags.datadoghq.com/version: {{ .version | quote }}
     {{- end }}
+  {{- if .Values.metadata }}
+  {{- if .Values.metadata.namespace }}
+  namespace: {{ .Values.metadata.namespace }}
+  {{- end }}
+  {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
   {{- with .Values.minReadySeconds}}
@@ -46,9 +51,12 @@ spec:
         tags.datadoghq.com/service: {{ .service }}
         tags.datadoghq.com/version: {{ .version | quote }}
         {{- end }}
+        {{- if .Values.harness.enabled }}
+        sidecar.istio.io/inject: 'true'
+        {{- end }}
       {{- with .Values.annotations }}
       annotations:
-{{ toYaml . | indent 8 }}
+        {{- toYaml . | nindent 8 }}
       {{- end }}
     spec:
       {{- with .Values.hostAliases }}
@@ -112,11 +120,11 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- if .Values.image.args }}
           args:
-{{ toYaml .Values.image.args | indent 12 }}
+            {{- toYaml .Values.image.args | nindent 12 }}
           {{- end }}
           {{- if .Values.image.command }}
           command:
-{{ toYaml .Values.image.command | indent 12 }}
+            {{- toYaml .Values.image.command | nindent 12 }}
           {{- end }}
           {{- if .Values.envFromSecret }}
           envFrom:
@@ -161,11 +169,11 @@ spec:
               protocol: TCP
             {{- end }}
           livenessProbe:
-{{ toYaml .Values.livenessProbe | indent 12 }}
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
-{{ toYaml .Values.readinessProbe | indent 12 }}
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
           startupProbe:
-{{ toYaml .Values.startupProbe | indent 12 }}
+            {{- toYaml .Values.startupProbe | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           securityContext:

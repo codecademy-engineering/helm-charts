@@ -1,0 +1,22 @@
+{{- if .Values.harness.enabled }}
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ include "service.fullname" . }}-restricted
+  {{- if .Values.metadata }}
+  {{- if .Values.metadata.namespace }}
+  namespace: {{ .Values.metadata.namespace }}
+  {{- end }}
+  {{- end }}
+spec:
+  gateways:
+    - istio-system/restricted-ingress-gateway
+  hosts:
+    - {{ .Values.virtualservice_restricted.host }}
+  http:
+    - route:
+        - destination:
+            host: {{ include "service.fullname" . }}
+            port:
+              number: {{ .Values.service.port }}
+{{- end }}

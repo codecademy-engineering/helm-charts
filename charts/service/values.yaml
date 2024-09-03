@@ -126,3 +126,9 @@ preReleaseJob:
 
 initContainer:
   enabled: false
+
+harness:
+  enabled: false
+
+verticalpodautoscaler:
+  enabled: false
