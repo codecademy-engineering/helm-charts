@@ -5,8 +5,10 @@ metadata:
   name: {{ include "service.fullname" . }}
   labels:
     {{- include "service.labels" . | nindent 4 }}
+  {{- if .Values.metadata }}
   {{- if .Values.metadata.namespace }}
   namespace: {{ .Values.metadata.namespace }}
+  {{- end }}
   {{- end }}
 spec:
   scaleTargetRef:

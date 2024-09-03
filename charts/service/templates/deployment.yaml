@@ -10,8 +10,10 @@ metadata:
     tags.datadoghq.com/service: {{ .service }}
     tags.datadoghq.com/version: {{ .version | quote }}
     {{- end }}
+  {{- if .Values.metadata }}
   {{- if .Values.metadata.namespace }}
   namespace: {{ .Values.metadata.namespace }}
+  {{- end }}
   {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
