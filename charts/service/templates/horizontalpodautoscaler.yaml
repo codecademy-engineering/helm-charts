@@ -5,6 +5,9 @@ metadata:
   name: {{ include "service.fullname" . }}
   labels:
     {{- include "service.labels" . | nindent 4 }}
+  {{- if .Values.metadata.namespace }}
+  namespace: {{ .Values.metadata.namespace }}
+  {{- end }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
