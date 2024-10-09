@@ -1,0 +1,10 @@
+service:
+  enabled: false
+
+datadog:
+  env: test
+  service: test-service
+  version: 1.2.3
+  git:
+    repositoryUrl: https://github.com/codecademy-engineering/helm-charts
+    commitSha: 1234567890abcdef

@@ -105,6 +105,9 @@ datadog: {}
   # env: production
   # service: service_name
   # version: version
+  # git: {} see below for valid fields
+  #   repositoryUrl: https://github.com/codecademy-engineering/my-repo
+  #   commitSha: valid git commit sha for repositoryUrl
 
 preReleaseJob:
   enabled: false

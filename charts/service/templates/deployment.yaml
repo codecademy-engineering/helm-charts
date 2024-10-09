@@ -98,6 +98,12 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.labels['tags.datadoghq.com/version']
+            {{- with .git }}
+            - name: DD_GIT_REPOSITORY_URL
+              value: {{ .repositoryUrl }}
+            - name: DD_GIT_COMMIT_SHA
+              value: {{ .commitSha }}
+            {{- end }}
           {{- end }}
           {{- with .Values.initContainer.resources }}
           resources:
@@ -141,6 +147,12 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.labels['tags.datadoghq.com/version']
+            {{- with .git }}
+            - name: DD_GIT_REPOSITORY_URL
+              value: {{ .repositoryUrl }}
+            - name: DD_GIT_COMMIT_SHA
+              value: {{ .commitSha }}
+            {{- end }}
           {{- end }}
           {{- range $key, $value := .Values.envKeyValue }}
             - name: {{ $key }}
