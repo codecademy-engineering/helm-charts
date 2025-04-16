@@ -1,0 +1,22 @@
+{{- if .Values.harness.enabled }}
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ include "service.fullname" . }}
+  {{- if .Values.metadata }}
+  {{- if .Values.metadata.namespace }}
+  namespace: {{ .Values.metadata.namespace }}
+  {{- end }}
+  {{- end }}
+spec:
+  gateways:
+    - mesh
+  hosts:
+    - {{ include "service.fullname" . }}
+  http:
+    - route:
+        - destination:
+            host: {{ include "service.fullname" . }}
+            port:
+              number: {{ .Values.service.port }}
+{{- end }}
