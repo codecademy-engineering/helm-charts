@@ -10,6 +10,11 @@ metadata:
     tags.datadoghq.com/service: {{ .service }}
     tags.datadoghq.com/version: {{ .version | quote }}
     {{- end }}
+    {{- with .Values.otel }}
+    opentelemetry/env: {{ .env }}
+    opentelemetry/service: {{ .service }}
+    opentelemetry/version: {{ .version | quote }}
+    {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
   {{- with .Values.minReadySeconds}}
@@ -45,6 +50,11 @@ spec:
         tags.datadoghq.com/env: {{ .env }}
         tags.datadoghq.com/service: {{ .service }}
         tags.datadoghq.com/version: {{ .version | quote }}
+        {{- end }}
+        {{- with .Values.otel }}
+        opentelemetry/env: {{ .env }}
+        opentelemetry/service: {{ .service }}
+        opentelemetry/version: {{ .version | quote }}
         {{- end }}
       {{- with .Values.annotations }}
       annotations:
@@ -99,6 +109,24 @@ spec:
                 fieldRef:
                   fieldPath: metadata.labels['tags.datadoghq.com/version']
           {{- end }}
+          {{- with .Values.otel }}
+            - name: OTEL_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: OTEL_ENV
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['opentelemetry/env']
+            - name: OTEL_SERVICE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['opentelemetry/service']
+            - name: OTEL_VERSION
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['opentelemetry/version']
+          {{- end }}
           {{- with .Values.initContainer.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
@@ -141,6 +169,24 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.labels['tags.datadoghq.com/version']
+          {{- end }}
+          {{- with .Values.otel }}
+            - name: OTEL_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: OTEL_ENV
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['opentelemetry/env']
+            - name: OTEL_SERVICE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['opentelemetry/service']
+            - name: OTEL_VERSION
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['opentelemetry/version']
           {{- end }}
           {{- range $key, $value := .Values.envKeyValue }}
             - name: {{ $key }}

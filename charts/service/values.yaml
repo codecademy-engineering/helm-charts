@@ -102,6 +102,7 @@ serviceAccount:
   name: ""
 
 datadog: {}
+otel: {}
   # env: production
   # service: service_name
   # version: version
