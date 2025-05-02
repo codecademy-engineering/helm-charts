@@ -107,4 +107,4 @@ keda:
     - type: memory
       metricType: Utilization
       metadata:
-        value: "100"
+        value: "80"
