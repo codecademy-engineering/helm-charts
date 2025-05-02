@@ -105,6 +105,10 @@ keda:
             periodSeconds: 15
   triggers:
     - type: memory
+      metricType: Utilization
+      metadata:
+        value: "100"
+    - type: custom
       metricType: AverageValue
       metadata:
-        value: "80"
+        value: "50"
