@@ -170,6 +170,11 @@ persistentVolumeClaims:
       name: standard
     storage: 1Gi
 
+datadog:
+  service: foobar
+  version: foo
+  env: bar
+
 otel:
   service: foobar
   version: foo
