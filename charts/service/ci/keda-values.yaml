@@ -108,3 +108,7 @@ keda:
       metricType: Utilization
       metadata:
         value: "100"
+    - type: custom
+      metricType: AverageValue
+      metadata:
+        value: "50"

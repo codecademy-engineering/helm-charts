@@ -2,6 +2,7 @@
 {{- $tag := .Values.image.tag -}}
 {{- $imagePullPolicy := .Values.image.pullPolicy -}}
 {{- $datadog := .Values.datadog -}}
+{{- $otel := .Values.otel -}}
 {{- $securityContext := .Values.securityContext -}}
 {{- $parentEnvKeyValue := .Values.envKeyValue -}}
 {{- $parentEnv := .Values.env -}}
@@ -23,6 +24,13 @@ spec:
         tags.datadoghq.com/env: {{ .env }}
         tags.datadoghq.com/service: {{ .service }}
         tags.datadoghq.com/version: {{ .version | quote }}
+        {{- end }}
+        {{- end }}
+        {{- with $otel }}
+        {{- if and .service .env }}
+        opentelemetry/env: {{ .env }}
+        opentelemetry/service: {{ .service }}
+        opentelemetry/version: {{ .version | quote }}
         {{- end }}
         {{- end }}
     spec:
@@ -60,6 +68,26 @@ spec:
                 fieldRef:
                   fieldPath: metadata.labels['tags.datadoghq.com/service']
             - name: DD_VERSION
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/version']
+            {{- end }}
+            {{- end }}
+            {{- with $otel }}
+            {{- if and .service .env }}
+            - name: OTEL_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: OTEL_ENV
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/env']
+            - name: OTEL_SERVICE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/service']
+            - name: OTEL_VERSION
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.labels['tags.datadoghq.com/version']

@@ -7,6 +7,7 @@
 {{- $parentEnvKeyValue := .Values.envKeyValue -}}
 {{- $parentEnv := .Values.env -}}
 {{- $datadog := .Values.datadog -}}
+{{- $otel := .Values.otel -}}
 {{- range .Values.cronJobs }}
 ---
 apiVersion: batch/v1
@@ -62,6 +63,24 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.labels['tags.datadoghq.com/version']
+            {{- end }}
+            {{- with $otel }}
+            - name: OTEL_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: OTEL_ENV
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['opentelemetry/env']
+            - name: OTEL_SERVICE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['opentelemetry/service']
+            - name: OTEL_VERSION
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['opentelemetry/version']
             {{- end }}
             {{- if .envFromSecret }}
             envFrom:
