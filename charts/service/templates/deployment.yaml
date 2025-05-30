@@ -11,9 +11,9 @@ metadata:
     tags.datadoghq.com/version: {{ .version | quote }}
     {{- end }}
     {{- with .Values.otel }}
-    opentelemetry/env: {{ .env }}
-    opentelemetry/service: {{ .service }}
-    opentelemetry/version: {{ .version | quote }}
+    tags.datadoghq.com/env: {{ .env }}
+    tags.datadoghq.com/service: {{ .service }}
+    tags.datadoghq.com/version: {{ .version | quote }}
     {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
@@ -52,9 +52,9 @@ spec:
         tags.datadoghq.com/version: {{ .version | quote }}
         {{- end }}
         {{- with .Values.otel }}
-        opentelemetry/env: {{ .env }}
-        opentelemetry/service: {{ .service }}
-        opentelemetry/version: {{ .version | quote }}
+        tags.datadoghq.com/env: {{ .env }}
+        tags.datadoghq.com/service: {{ .service }}
+        tags.datadoghq.com/version: {{ .version | quote }}
         {{- end }}
       {{- with .Values.annotations }}
       annotations:
