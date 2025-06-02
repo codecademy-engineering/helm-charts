@@ -117,15 +117,15 @@ spec:
             - name: OTEL_ENV
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.labels['opentelemetry/env']
+                  fieldPath: metadata.labels['tags.datadoghq.com/env']
             - name: OTEL_SERVICE
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.labels['opentelemetry/service']
+                  fieldPath: metadata.labels['tags.datadoghq.com/service']
             - name: OTEL_VERSION
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.labels['opentelemetry/version']
+                  fieldPath: metadata.labels['tags.datadoghq.com/version']
           {{- end }}
           {{- with .Values.initContainer.resources }}
           resources:
@@ -178,15 +178,15 @@ spec:
             - name: OTEL_ENV
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.labels['opentelemetry/env']
+                  fieldPath: metadata.labels['tags.datadoghq.com/env']
             - name: OTEL_SERVICE
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.labels['opentelemetry/service']
+                  fieldPath: metadata.labels['tags.datadoghq.com/service']
             - name: OTEL_VERSION
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.labels['opentelemetry/version']
+                  fieldPath: metadata.labels['tags.datadoghq.com/version']
           {{- end }}
           {{- range $key, $value := .Values.envKeyValue }}
             - name: {{ $key }}
