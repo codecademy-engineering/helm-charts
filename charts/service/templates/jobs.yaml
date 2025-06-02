@@ -28,9 +28,9 @@ spec:
         {{- end }}
         {{- with $otel }}
         {{- if and .service .env }}
-        opentelemetry/env: {{ .env }}
-        opentelemetry/service: {{ .service }}
-        opentelemetry/version: {{ .version | quote }}
+        tags.datadoghq.com/env: {{ .env }}
+        tags.datadoghq.com/service: {{ .service }}
+        tags.datadoghq.com/version: {{ .version | quote }}
         {{- end }}
         {{- end }}
     spec:
