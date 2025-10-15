@@ -75,17 +75,23 @@ spec:
                 fieldRef:
                   fieldPath: status.hostIP
             - name: OTEL_ENV
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['tags.datadoghq.com/env']
+              value: {{ .env }}
             - name: OTEL_SERVICE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['tags.datadoghq.com/service']
+              value: {{ .service }}
+            - name: OTEL_SERVICE_NAME
+              value: {{ .service }}
             - name: OTEL_VERSION
+              value: {{ .version | quote }}
+            - name: OTEL_CRONJOB_NAME
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.labels['tags.datadoghq.com/version']
+                  fieldPath: metadata.name
+            - name: OTEL_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: OTEL_RESOURCE_ATTRIBUTES
+              value: k8s.namespace.name=$(OTEL_NAMESPACE),deployment.environment=$(OTEL_ENV),service.version=$(OTEL_VERSION),k8s.cronjob.name=$(OTEL_CRONJOB_NAME)
             {{- end }}
             {{- if .envFromSecret }}
             envFrom:
