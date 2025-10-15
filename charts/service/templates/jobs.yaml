@@ -75,7 +75,7 @@ spec:
             {{- end }}
             {{- with $otel }}
             {{- if and .service .env }}
-              - name: OTEL_AGENT_HOST
+            - name: OTEL_AGENT_HOST
               valueFrom:
                 fieldRef:
                   fieldPath: status.hostIP
