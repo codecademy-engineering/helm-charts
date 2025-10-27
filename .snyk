@@ -1,0 +1,14 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.25.1
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  SNYK-CC-K8S-9:
+    - 'charts/service/templates/deployment.yaml > spec > template > spec > containers[service] > securityContext > allowPrivilegeEscalation':
+        reason: >-
+          Gatekeeper prohibits running container services as root, but some of
+          our administrative k8s services require root and have exceptions to
+          the gatekeeper rule. If we enabled this setting in snyk it would
+          prohibit those administrative services from running correctly.
+        expires: 2700-01-29T00:00:00.000Z
+        created: 2025-10-22T14:22:34.502Z
+patch: {}
