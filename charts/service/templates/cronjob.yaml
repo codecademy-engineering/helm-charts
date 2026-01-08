@@ -6,7 +6,6 @@
 {{- $imagePullPolicy := .Values.image.imagePullPolicy -}}
 {{- $parentEnvKeyValue := .Values.envKeyValue -}}
 {{- $parentEnv := .Values.env -}}
-{{- $datadog := .Values.datadog -}}
 {{- $otel := .Values.otel -}}
 {{- range .Values.cronJobs }}
 ---
@@ -22,15 +21,13 @@ spec:
       template:
         metadata:
           labels:
-          {{- with $datadog }}
-            tags.datadoghq.com/env: {{ .env }}
-            tags.datadoghq.com/service: {{ .service }}
-            tags.datadoghq.com/version: {{ .version | quote }}
-          {{- end }}
           {{- with $otel }}
             tags.datadoghq.com/env: {{ .env }}
             tags.datadoghq.com/service: {{ .service }}
             tags.datadoghq.com/version: {{ .version | quote }}
+            environment: {{ .env }}
+            service: {{ .service }}
+            version:  {{ .version | quote }}
           {{- end }}
         spec:
           serviceAccountName: {{ $serviceAccountName }}
@@ -50,24 +47,6 @@ spec:
             {{- end }}
             {{- with .env }}
               {{- toYaml . | nindent 12 }}
-            {{- end }}
-            {{- with $datadog }}
-            - name: DD_AGENT_HOST
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
-            - name: DD_ENV
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['tags.datadoghq.com/env']
-            - name: DD_SERVICE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['tags.datadoghq.com/service']
-            - name: DD_VERSION
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['tags.datadoghq.com/version']
             {{- end }}
             {{- with $otel }}
             - name: OTEL_AGENT_HOST

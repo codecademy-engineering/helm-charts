@@ -101,7 +101,6 @@ serviceAccount:
   # If not set and enabled is true, a name is generated using the fullname template
   name: ""
 
-datadog: {}
 otel: {}
   # env: production
   # service: service_name
