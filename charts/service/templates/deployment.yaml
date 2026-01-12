@@ -5,15 +5,13 @@ metadata:
   name: {{ include "service.fullname" . }}
   labels:
     {{- include "service.labels" . | nindent 4 }}
-    {{- with .Values.datadog }}
-    tags.datadoghq.com/env: {{ .env }}
-    tags.datadoghq.com/service: {{ .service }}
-    tags.datadoghq.com/version: {{ .version | quote }}
-    {{- end }}
     {{- with .Values.otel }}
     tags.datadoghq.com/env: {{ .env }}
     tags.datadoghq.com/service: {{ .service }}
     tags.datadoghq.com/version: {{ .version | quote }}
+    environment: {{ .env }}
+    service: {{ .service }}
+    version:  {{ .version | quote }}
     {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
@@ -46,15 +44,13 @@ spec:
         {{- with .Values.podLabels }}
           {{- toYaml . | nindent 8 }}
         {{- end }}
-        {{- with .Values.datadog }}
-        tags.datadoghq.com/env: {{ .env }}
-        tags.datadoghq.com/service: {{ .service }}
-        tags.datadoghq.com/version: {{ .version | quote }}
-        {{- end }}
         {{- with .Values.otel }}
         tags.datadoghq.com/env: {{ .env }}
         tags.datadoghq.com/service: {{ .service }}
         tags.datadoghq.com/version: {{ .version | quote }}
+        environment: {{ .env }}
+        service: {{ .service }}
+        version:  {{ .version | quote }}
         {{- end }}
       {{- with .Values.annotations }}
       annotations:
@@ -90,24 +86,6 @@ spec:
           env:
           {{- with .Values.initContainer.env }}
             {{- toYaml . | nindent 12 }}
-          {{- end }}
-          {{- with .Values.datadog }}
-            - name: DD_AGENT_HOST
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
-            - name: DD_ENV
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['tags.datadoghq.com/env']
-            - name: DD_SERVICE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['tags.datadoghq.com/service']
-            - name: DD_VERSION
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['tags.datadoghq.com/version']
           {{- end }}
           {{- with .Values.otel }}
             - name: OTEL_AGENT_HOST
@@ -162,24 +140,6 @@ spec:
                 name: {{ .Values.envFromSecret }}
           {{- end }}
           env:
-          {{- with .Values.datadog }}
-            - name: DD_AGENT_HOST
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
-            - name: DD_ENV
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['tags.datadoghq.com/env']
-            - name: DD_SERVICE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['tags.datadoghq.com/service']
-            - name: DD_VERSION
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['tags.datadoghq.com/version']
-          {{- end }}
           {{- with .Values.otel }}
             - name: OTEL_AGENT_HOST
               valueFrom:

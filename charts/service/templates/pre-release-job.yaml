@@ -5,15 +5,13 @@ metadata:
   name: {{ include "service.fullname" . }}-pre-release-job
   labels:
     {{- include "service.labels" . | nindent 4 }}
-    {{- with .Values.datadog }}
-    tags.datadoghq.com/env: {{ .env }}
-    tags.datadoghq.com/service: {{ .service }}
-    tags.datadoghq.com/version: {{ .version | quote }}
-    {{- end }}
     {{- with .Values.otel }}
     opentelemetry/env: {{ .env }}
     opentelemetry/service: {{ .service }}
     opentelemetry/version: {{ .version | quote }}
+    environment: {{ .env }}
+    service: {{ .service }}
+    version:  {{ .version | quote }}
     {{- end }}
   annotations:
     "helm.sh/hook": pre-upgrade,pre-install
@@ -27,15 +25,13 @@ spec:
     metadata:
       name: {{ include "service.fullname" . }}-pre-release-job
       labels:
-        {{- with .Values.datadog }}
-        tags.datadoghq.com/env: {{ .env }}
-        tags.datadoghq.com/service: {{ .service }}
-        tags.datadoghq.com/version: {{ .version | quote }}
-        {{- end }}
         {{- with .Values.otel }}
         opentelemetry/env: {{ .env }}
         opentelemetry/service: {{ .service }}
         opentelemetry/version: {{ .version | quote }}
+        environment: {{ .env }}
+        service: {{ .service }}
+        version:  {{ .version | quote }}
         {{- end }}
     spec:
       restartPolicy: Never
@@ -52,24 +48,6 @@ spec:
           env:
           {{- with .Values.preReleaseJob.env }}
             {{- toYaml . | nindent 12 }}
-          {{- end }}
-          {{- with .Values.datadog }}
-            - name: DD_AGENT_HOST
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
-            - name: DD_ENV
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['tags.datadoghq.com/env']
-            - name: DD_SERVICE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['tags.datadoghq.com/service']
-            - name: DD_VERSION
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['tags.datadoghq.com/version']
           {{- end }}
           {{- with .Values.otel }}
             - name: OTEL_AGENT_HOST
