@@ -11,6 +11,10 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ .name }}
+  annotations:
+    "helm.sh/hook": {{ .hook | default "pre-upgrade,pre-install" }}
+    "helm.sh/hook-weight": {{ .hookWeight | default "0" | quote }}
+    "helm.sh/hook-delete-policy": {{ .hookDeletePolicy | default "before-hook-creation" }}
 spec:
   {{- if .ttlSecondsAfterFinished }}
   ttlSecondsAfterFinished: {{ .ttlSecondsAfterFinished }}
