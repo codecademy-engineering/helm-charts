@@ -84,6 +84,9 @@ service:
 
 ingress:
   enabled: false
+  # Ingress class determines which ingress controller to use
+  # Options: "nginx-nlb" (default) or "traefik"
+  class: nginx-nlb
   annotations: {}
     # kubernetes.io/ingress.class: nginx-nlb
   nlbIngressClassAnnotation:
@@ -91,6 +94,14 @@ ingress:
   hosts:
     - host: chart-example.local
       paths: []
+  # Traefik-specific configuration
+  # Only used when ingress.class is set to "traefik"
+  traefik:
+    # IngressClassName for Traefik (default: traefik-nlb)
+    ingressClassName: traefik-nlb
+    # Traefik-specific annotations
+    annotations: {}
+      # Example: traefik.ingress.kubernetes.io/router.middlewares: my-middleware@kubernetescrd
 
 serviceAccount:
   # Specifies whether a service account should be created

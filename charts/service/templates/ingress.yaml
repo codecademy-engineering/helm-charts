@@ -3,14 +3,24 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ $fullName }}-nlb
+  name: {{ $fullName }}-{{ .Values.ingress.class | default "nginx-nlb" }}
   labels:
     {{- include "service.labels" . | nindent 4 }}
+{{- if eq (.Values.ingress.class | default "nginx-nlb") "traefik" }}
+  {{- with .Values.ingress.traefik.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{- else }}
   {{- with merge .Values.ingress.nlbIngressClassAnnotation .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
+{{- end }}
 spec:
+{{- if eq (.Values.ingress.class | default "nginx-nlb") "traefik" }}
+  ingressClassName: {{ .Values.ingress.traefik.ingressClassName | default "traefik-nlb" }}
+{{- end }}
   {{- if .Values.ingress.tls }}
   tls:
     {{- range .Values.ingress.tls }}
@@ -29,20 +39,38 @@ spec:
           {{- range .paths }}
           {{- if (kindIs "map" .) }}
           - path: {{ .path }}
-            pathType: ImplementationSpecific
+            {{- if eq ($.Values.ingress.class | default "nginx-nlb") "traefik" }}
+            pathType: {{ .pathType | default "Prefix" }}
+            {{- else }}
+            pathType: {{ .pathType | default "ImplementationSpecific" }}
+            {{- end }}
             backend:
               service:
                 name: {{ .service }}
+                {{- if eq ($.Values.ingress.class | default "nginx-nlb") "traefik" }}
+                port:
+                  number: {{ .port | default 80 }}
+                {{- else }}
                 port:
                   name: http
+                {{- end }}
           {{- else }}
           - path: {{ . }}
+            {{- if eq ($.Values.ingress.class | default "nginx-nlb") "traefik" }}
+            pathType: Prefix
+            {{- else }}
             pathType: ImplementationSpecific
+            {{- end }}
             backend:
               service:
                 name: {{ $fullName }}
+                {{- if eq ($.Values.ingress.class | default "nginx-nlb") "traefik" }}
+                port:
+                  number: {{ $.Values.service.port }}
+                {{- else }}
                 port:
                   name: http
+                {{- end }}
           {{- end }}
           {{- end }}
     {{- end }}
