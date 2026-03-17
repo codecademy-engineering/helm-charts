@@ -1,0 +1,38 @@
+# Test values for Traefik ingress class
+resources:
+  requests:
+    cpu: 5m
+  limits:
+    cpu: 100m
+
+containerPort: 80
+
+service:
+  port: 80
+
+ingress:
+  enabled: true
+  class: traefik
+  hosts:
+    - host: example.traefik.codecademy.com
+      paths:
+        - '/'
+  traefik:
+    ingressClassName: traefik-nlb
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+
+startupProbe:
+  httpGet:
+    path: /
+    port: http
