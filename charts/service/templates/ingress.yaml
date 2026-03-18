@@ -3,7 +3,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ $fullName }}-{{ .Values.ingress.class | default "{{ $fullName }}-nlb" }}
+  name: {{ $fullName }}-nlb
   labels:
     {{- include "service.labels" . | nindent 4 }}
 {{- if eq (.Values.ingress.class | default "nginx-nlb") "traefik" }}
