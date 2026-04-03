@@ -36,18 +36,6 @@ spec:
             imagePullPolicy: {{ $imagePullPolicy }}
             name: {{ .name }}
             env:
-            {{- if .useParentEnv }}
-            {{- range $key, $value := $parentEnvKeyValue }}
-            - name: {{ $key }}
-              value: "{{ $value }}"
-            {{- end }}
-            {{- with $parentEnv }}
-              {{- toYaml . | nindent 12 }}
-            {{- end }}
-            {{- end }}
-            {{- with .env }}
-              {{- toYaml . | nindent 12 }}
-            {{- end }}
             {{- with $otel }}
             - name: OTEL_AGENT_HOST
               valueFrom:
@@ -71,6 +59,18 @@ spec:
                   fieldPath: metadata.namespace
             - name: OTEL_RESOURCE_ATTRIBUTES
               value: k8s.namespace.name=$(OTEL_NAMESPACE),deployment.environment=$(OTEL_ENV),service.version=$(OTEL_VERSION),k8s.cronjob.name=$(OTEL_CRONJOB_NAME)
+            {{- end }}
+            {{- if .useParentEnv }}
+            {{- range $key, $value := $parentEnvKeyValue }}
+            - name: {{ $key }}
+              value: "{{ $value }}"
+            {{- end }}
+            {{- with $parentEnv }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+            {{- end }}
+            {{- with .env }}
+              {{- toYaml . | nindent 12 }}
             {{- end }}
             {{- if .envFromSecret }}
             envFrom:
